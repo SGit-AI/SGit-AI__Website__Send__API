@@ -9,4 +9,4 @@ A release is a directory under `/vX.Y.Z/` on this host, served exactly as it is 
 
 <!-- releases -->
 
-The website around the releases has versions of its own, one per change that lands on `main`; [the version history](/versions/) has a line for each.
+The website around the releases has versions of its own, one per change that lands on `dev`; [the version history](/versions/) has a line for each.

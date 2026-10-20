@@ -23,7 +23,7 @@ Work is files with a status line: the reality file's proposed rows are the backl
 
 ## The rules the roles enforce
 
-- **A release is never edited after it is on `main`.** Mistake behind it: a reader pinned to a release that changed under them.
+- **A release is never edited after it is on `dev`.** Mistake behind it: a reader pinned to a release that changed under them.
 - **A vendored file is never edited.** Mistake: two drifting ports of the vault writer, each needing its own fix.
 - **A number on a page is counted.** Mistake: a word count that was remembered, and wrong.
 - **A claim carries a status.** Mistake: a feature described in the present tense that a brief had only proposed.

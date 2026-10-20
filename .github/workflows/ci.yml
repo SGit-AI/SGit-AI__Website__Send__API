@@ -24,22 +24,22 @@ jobs:
           python-version: '3.12'
       - name: The gate, exactly as it runs locally
         run: python3 tools/check.py
-      - name: The version is above the default branch's (every change that lands there is a version)
-        if: github.ref != 'refs/heads/main'
+      - name: The version is above dev's (every change that lands there is a version)
+        if: github.ref != 'refs/heads/dev'
         run: |
           set -euo pipefail
-          git fetch --quiet origin main || exit 0
+          git fetch --quiet origin dev || exit 0
           python3 - <<'PY'
           import json, subprocess, sys
           t = lambda v: tuple(int(x) for x in v[1:].split("."))
           here = json.load(open("tools/version.json"))["version"]
           try:
-              base = json.loads(subprocess.check_output(["git", "show", "origin/main:tools/version.json"])).get("version", "v0.0.0")
+              base = json.loads(subprocess.check_output(["git", "show", "origin/dev:tools/version.json"])).get("version", "v0.0.0")
           except subprocess.CalledProcessError:
               base = "v0.0.0"
           if t(here) <= t(base):
-              sys.exit(f"::error::tools/version.json says {here}; main is at {base}: bump the version")
-          print(f"{here} is above main's {base}")
+              sys.exit(f"::error::tools/version.json says {here}; dev is at {base}: bump the version")
+          print(f"{here} is above dev's {base}")
           PY
       - name: The release's tests, in Node, against the in-memory server
         run: |

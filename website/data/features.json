@@ -44,7 +44,7 @@
     { "title": "The website and the pipeline", "features": [
       { "feature": "Every page with a markdown twin, llms.txt, llms-full.txt, sitemap; chrome injected at build", "status": "shipped", "since": "v0.1.0", "evidence": "`tools/sitekit.py`, `www/`" },
       { "feature": "The gate: build is committed, manifests match, links, twins, origins, tripwire, prose, version", "status": "shipped", "since": "v0.1.0", "evidence": "`tools/check.py`, `.github/workflows/ci.yml`" },
-      { "feature": "Deploy to GitHub Pages on main, tag, then verify the live host", "status": "shipped", "since": "v0.1.0", "evidence": "`.github/workflows/deploy-pages.yml`; the first run waits on Pages and DNS (see needs)" },
+      { "feature": "Deploy to GitHub Pages on dev, tag, then verify the live host", "status": "shipped", "since": "v0.1.0", "evidence": "`.github/workflows/deploy-pages.yml`; the first run waits on Pages and DNS (see needs)" },
       { "feature": "A review/ folder with the project as layered graphs", "status": "proposed", "since": "", "evidence": "`review/intent/` holds the brief as sections; the derived graph and the navigator are not built" }
     ]}
   ]

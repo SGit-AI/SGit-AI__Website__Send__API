@@ -32,7 +32,7 @@ Every HTML page has a markdown twin at the same path with the extension swapped;
 - [How to run the tests](/how-to/run-the-tests/index.md): The Node tests against the in-memory server, the browser smoke test in Chromium, and the gate; what each proves.
 - [Releases](/releases/index.md): Every release of the reader code, newest first, with its date, size and manifest. A release is never edited after it is published.
 - [Quick start, send a file from a page](/start/index.md): Twelve lines to encrypt a file in the browser, upload it as a transfer, and hand over a link and a QR code; and the two lines that open it.
-- [Version history](/versions/index.md): One line per version, newest first, saying what changed and why. Every change that lands on main is a version; the deploy tags it.
+- [Version history](/versions/index.md): One line per version, newest first, saying what changed and why. Every change that lands on dev is a version; the deploy tags it.
 - [The current release's manifest](/v0.1.0/manifest.json): every file with its size and SHA-256
 - [The release's README](/v0.1.0/README.md): the modules and what each does
 - [releases.json](/releases.json): every release, newest first
@@ -206,7 +206,7 @@ The brief ([published in full](/about/brief/)) is never edited to look right aft
 
 Everything an agent could do is done; these steps need the lead's accounts.
 
-1. **Merge the branch to `main`.** The deploy workflow runs on `main`; the branch `claude/wonderful-ride-c8qicn` carries v0.1.0.
+1. **Merge the branch to `dev`.** The deploy workflow runs on `dev`; the branch `claude/wonderful-ride-c8qicn` carries v0.1.0.
 2. **Enable GitHub Pages for the repository** with the source set to GitHub Actions (the workflow's `configure-pages` step does this when the repository allows it).
 3. **DNS:** a `CNAME` record for `api.send.sgit.ai` pointing at `sgit-ai.github.io`. The `CNAME` file in the repository names the host; Pages will issue the certificate once the record resolves.
 4. **Let the first deploy finish.** Its last job polls the live host for up to ten minutes and compares every file of v0.1.0 with the manifest; until the DNS resolves it fails, by design.
@@ -314,7 +314,7 @@ Generated from `website/data/features.json` on every build; audited 2026-10-20, 
 |---|---|---|---|
 | Every page with a markdown twin, llms.txt, llms-full.txt, sitemap; chrome injected at build | <span class="sg-status sg-status-shipped">shipped</span> | v0.1.0 | `tools/sitekit.py`, `www/` |
 | The gate: build is committed, manifests match, links, twins, origins, tripwire, prose, version | <span class="sg-status sg-status-shipped">shipped</span> | v0.1.0 | `tools/check.py`, `.github/workflows/ci.yml` |
-| Deploy to GitHub Pages on main, tag, then verify the live host | <span class="sg-status sg-status-shipped">shipped</span> | v0.1.0 | `.github/workflows/deploy-pages.yml`; the first run waits on Pages and DNS (see needs) |
+| Deploy to GitHub Pages on dev, tag, then verify the live host | <span class="sg-status sg-status-shipped">shipped</span> | v0.1.0 | `.github/workflows/deploy-pages.yml`; the first run waits on Pages and DNS (see needs) |
 | A review/ folder with the project as layered graphs | <span class="sg-status sg-status-proposed">proposed</span> |  | `review/intent/` holds the brief as sections; the derived graph and the navigator are not built |
 
 **Counted, not remembered:** 1 absent, 7 proposed, 22 shipped.
@@ -347,7 +347,7 @@ Work is files with a status line: the reality file's proposed rows are the backl
 
 ## The rules the roles enforce
 
-- **A release is never edited after it is on `main`.** Mistake behind it: a reader pinned to a release that changed under them.
+- **A release is never edited after it is on `dev`.** Mistake behind it: a reader pinned to a release that changed under them.
 - **A vendored file is never edited.** Mistake: two drifting ports of the vault writer, each needing its own fix.
 - **A number on a page is counted.** Mistake: a word count that was remembered, and wrong.
 - **A claim carries a status.** Mistake: a feature described in the present tense that a brief had only proposed.
@@ -741,7 +741,7 @@ The vendored library owns this contract and this release does not restate it: re
 
 ## How a release is served
 
-`main` is the release branch. A push runs the gate, tags the version, assembles the Pages tree (`www/` at the root and every `releases/vX.Y.Z/` directory beside it as `/vX.Y.Z/`) and deploys it; a last job then fetches every file of the current release from the live host and compares its hash with the manifest. `/releases.json` lists every release with its date, file count and size.
+`dev` is the release branch. A push runs the gate, tags the version, assembles the Pages tree (`www/` at the root and every `releases/vX.Y.Z/` directory beside it as `/vX.Y.Z/`) and deploys it; a last job then fetches every file of the current release from the live host and compares its hash with the manifest. `/releases.json` lists every release with its date, file count and size.
 
 GitHub Pages sends `access-control-allow-origin: *`, which is what lets a module on this host be imported by a page on another, and it has no way to receive a request.
 
@@ -848,7 +848,7 @@ The [IFD methodology](https://github.com/the-cyber-boardroom/SGraph-AI__App__Sen
 3. A test in `tests/` that fails without the change; `node --test 'tests/*.test.mjs'` green.
 4. `python3 tools/release.py cut v0.1.1` writes the manifest; `tools/version.json` says `release: v0.1.1`.
 5. A line in `website/data/versions.json` that says what changed and why, in words a reader can act on.
-6. `python3 tools/build.py && python3 tools/check.py`, commit, push. `main` deploys, tags, and checks the live host.
+6. `python3 tools/build.py && python3 tools/check.py`, commit, push. `dev` deploys, tags, and checks the live host.
 
 [How to make a release](/how-to/make-a-release/) is the same list as a checklist. The article that argues this out is [Independent releases](/articles/independent-releases.html).
 
@@ -1064,7 +1064,7 @@ A release is a directory under `/vX.Y.Z/` on this host, served exactly as it is 
 |---|---|---|---|---|---|
 | **v0.1.0** | 2026-10-20 | 36 | 274,733 | [manifest.json](/v0.1.0/manifest.json) | [README](/v0.1.0/README.md) |
 
-The website around the releases has versions of its own, one per change that lands on `main`; [the version history](/versions/) has a line for each.
+The website around the releases has versions of its own, one per change that lands on `dev`; [the version history](/versions/) has a line for each.
 
 
 ==============================================================================
@@ -1149,7 +1149,7 @@ A vault is versioned, browsable, updatable, and clonable with `sgit clone <read 
 
 # Version history
 
-> One line per version, newest first, saying what changed and why. Every change that lands on main is a version; the deploy tags it.
+> One line per version, newest first, saying what changed and why. Every change that lands on dev is a version; the deploy tags it.
 
 *Source: <https://api.send.sgit.ai/versions/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
@@ -1157,7 +1157,7 @@ A vault is versioned, browsable, updatable, and clonable with `sgit clone <read 
 
 # Version history
 
-Every change that lands on `main` is a version, in `tools/version.json`, tagged by the deploy and shown in the header of every page. The `release` column is the cut of the code a site pins; it moves only when a served file changes.
+Every change that lands on `dev` is a version, in `tools/version.json`, tagged by the deploy and shown in the header of every page. The `release` column is the cut of the code a site pins; it moves only when a served file changes.
 
 | Version | Date | Kind | What changed, and why |
 |---|---|---|---|

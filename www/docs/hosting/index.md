@@ -10,7 +10,7 @@
 
 ## How a release is served
 
-`main` is the release branch. A push runs the gate, tags the version, assembles the Pages tree (`www/` at the root and every `releases/vX.Y.Z/` directory beside it as `/vX.Y.Z/`) and deploys it; a last job then fetches every file of the current release from the live host and compares its hash with the manifest. `/releases.json` lists every release with its date, file count and size.
+`dev` is the release branch. A push runs the gate, tags the version, assembles the Pages tree (`www/` at the root and every `releases/vX.Y.Z/` directory beside it as `/vX.Y.Z/`) and deploys it; a last job then fetches every file of the current release from the live host and compares its hash with the manifest. `/releases.json` lists every release with its date, file count and size.
 
 GitHub Pages sends `access-control-allow-origin: *`, which is what lets a module on this host be imported by a page on another, and it has no way to receive a request.
 

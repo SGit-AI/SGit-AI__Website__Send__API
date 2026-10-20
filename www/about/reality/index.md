@@ -77,7 +77,7 @@ Generated from `website/data/features.json` on every build; audited 2026-10-20, 
 |---|---|---|---|
 | Every page with a markdown twin, llms.txt, llms-full.txt, sitemap; chrome injected at build | <span class="sg-status sg-status-shipped">shipped</span> | v0.1.0 | `tools/sitekit.py`, `www/` |
 | The gate: build is committed, manifests match, links, twins, origins, tripwire, prose, version | <span class="sg-status sg-status-shipped">shipped</span> | v0.1.0 | `tools/check.py`, `.github/workflows/ci.yml` |
-| Deploy to GitHub Pages on main, tag, then verify the live host | <span class="sg-status sg-status-shipped">shipped</span> | v0.1.0 | `.github/workflows/deploy-pages.yml`; the first run waits on Pages and DNS (see needs) |
+| Deploy to GitHub Pages on dev, tag, then verify the live host | <span class="sg-status sg-status-shipped">shipped</span> | v0.1.0 | `.github/workflows/deploy-pages.yml`; the first run waits on Pages and DNS (see needs) |
 | A review/ folder with the project as layered graphs | <span class="sg-status sg-status-proposed">proposed</span> |  | `review/intent/` holds the brief as sections; the derived graph and the navigator are not built |
 
 **Counted, not remembered:** 1 absent, 7 proposed, 22 shipped.

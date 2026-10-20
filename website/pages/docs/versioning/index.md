@@ -31,6 +31,6 @@ The [IFD methodology](https://github.com/the-cyber-boardroom/SGraph-AI__App__Sen
 3. A test in `tests/` that fails without the change; `node --test 'tests/*.test.mjs'` green.
 4. `python3 tools/release.py cut v0.1.1` writes the manifest; `tools/version.json` says `release: v0.1.1`.
 5. A line in `website/data/versions.json` that says what changed and why, in words a reader can act on.
-6. `python3 tools/build.py && python3 tools/check.py`, commit, push. `main` deploys, tags, and checks the live host.
+6. `python3 tools/build.py && python3 tools/check.py`, commit, push. `dev` deploys, tags, and checks the live host.
 
 [How to make a release](/how-to/make-a-release/) is the same list as a checklist. The article that argues this out is [Independent releases](/articles/independent-releases.html).

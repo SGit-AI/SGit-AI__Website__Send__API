@@ -14,4 +14,4 @@ A release is a directory under `/vX.Y.Z/` on this host, served exactly as it is 
 |---|---|---|---|---|---|
 | **v0.1.0** | 2026-10-20 | 36 | 274,733 | [manifest.json](/v0.1.0/manifest.json) | [README](/v0.1.0/README.md) |
 
-The website around the releases has versions of its own, one per change that lands on `main`; [the version history](/versions/) has a line for each.
+The website around the releases has versions of its own, one per change that lands on `dev`; [the version history](/versions/) has a line for each.

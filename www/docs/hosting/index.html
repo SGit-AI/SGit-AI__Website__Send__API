@@ -38,7 +38,7 @@
 <main id="main">
 <h1 id="hosting-and-pinning">Hosting and pinning</h1>
 <h2 id="how-a-release-is-served">How a release is served</h2>
-<p><code>main</code> is the release branch. A push runs the gate, tags the version, assembles the Pages tree (<code>www/</code> at the root and every <code>releases/vX.Y.Z/</code> directory beside it as <code>/vX.Y.Z/</code>) and deploys it; a last job then fetches every file of the current release from the live host and compares its hash with the manifest. <code>/releases.json</code> lists every release with its date, file count and size.</p>
+<p><code>dev</code> is the release branch. A push runs the gate, tags the version, assembles the Pages tree (<code>www/</code> at the root and every <code>releases/vX.Y.Z/</code> directory beside it as <code>/vX.Y.Z/</code>) and deploys it; a last job then fetches every file of the current release from the live host and compares its hash with the manifest. <code>/releases.json</code> lists every release with its date, file count and size.</p>
 <p>GitHub Pages sends <code>access-control-allow-origin: *</code>, which is what lets a module on this host be imported by a page on another, and it has no way to receive a request.</p>
 <h2 id="what-a-site-pins">What a site pins</h2>
 <pre><code class="language-json">{ &quot;host&quot;: &quot;https://api.send.sgit.ai&quot;, &quot;release&quot;: &quot;v0.1.0&quot; }</code></pre>

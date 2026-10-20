@@ -32,7 +32,7 @@ Every HTML page has a markdown twin at the same path with the extension swapped;
 - [How to run the tests](/how-to/run-the-tests/index.md): The Node tests against the in-memory server, the browser smoke test in Chromium, and the gate; what each proves.
 - [Releases](/releases/index.md): Every release of the reader code, newest first, with its date, size and manifest. A release is never edited after it is published.
 - [Quick start, send a file from a page](/start/index.md): Twelve lines to encrypt a file in the browser, upload it as a transfer, and hand over a link and a QR code; and the two lines that open it.
-- [Version history](/versions/index.md): One line per version, newest first, saying what changed and why. Every change that lands on main is a version; the deploy tags it.
+- [Version history](/versions/index.md): One line per version, newest first, saying what changed and why. Every change that lands on dev is a version; the deploy tags it.
 - [The current release's manifest](/v0.1.0/manifest.json): every file with its size and SHA-256
 - [The release's README](/v0.1.0/README.md): the modules and what each does
 - [releases.json](/releases.json): every release, newest first

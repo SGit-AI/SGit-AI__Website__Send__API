@@ -1,11 +1,11 @@
-# main, the default branch, is the release branch: gate, tag the version, publish api.send.sgit.ai (www/ at the root,
+# dev is the release branch: gate, tag the version, publish api.send.sgit.ai (www/ at the root,
 # every release directory beside it), then ask the live host for the hash of every file of the current release.
 # Pages for this repository deploys from GitHub Actions (configure-pages enables it). Green does not mean live:
 # the last job fails the run if the host does not serve the release.
 name: deploy-pages
 on:
   push:
-    branches: [main]
+    branches: [dev]
   workflow_dispatch:
 permissions:
   contents: write

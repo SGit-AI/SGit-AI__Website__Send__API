@@ -5,7 +5,7 @@ the gate and the release, from a brief; writes next to the brief, never into it.
 
 ## Rules this role enforces
 
-- **A release is never edited after it is on `main`.** A change is the next directory, copied whole. Mistake: a reader pinned to a release that changed under them.
+- **A release is never edited after it is on `dev`.** A change is the next directory, copied whole. Mistake: a reader pinned to a release that changed under them.
 - **A vendored file is never edited.** A fix goes upstream; a refresh is a new release with new hashes recorded. Mistake: two ports of the vault writer that drifted.
 - **No mocks.** A test runs the real client against `tests/server.mjs`; a credential test has a negative control. Mistake: a test that passed with a wrong input.
 - **Every claim carries a status,** shipped, proposed or absent, from `features.json`. Mistake: a feature described in the present tense that a brief had only proposed.

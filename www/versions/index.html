@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Version history, api.send.sgit.ai</title>
-<meta name="description" content="One line per version, newest first, saying what changed and why. Every change that lands on main is a version; the deploy tags it.">
+<meta name="description" content="One line per version, newest first, saying what changed and why. Every change that lands on dev is a version; the deploy tags it.">
 <link rel="canonical" href="https://api.send.sgit.ai/versions/">
 <link rel="alternate" type="text/markdown" href="/versions/index.md">
 <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="api.send.sgit.ai">
 <meta property="og:title" content="Version history, api.send.sgit.ai">
-<meta property="og:description" content="One line per version, newest first, saying what changed and why. Every change that lands on main is a version; the deploy tags it.">
+<meta property="og:description" content="One line per version, newest first, saying what changed and why. Every change that lands on dev is a version; the deploy tags it.">
 <meta property="og:url" content="https://api.send.sgit.ai/versions/">
 <script src="/assets/theme.js"></script>
 <link rel="stylesheet" href="/assets/themes.css">
@@ -37,7 +37,7 @@
 <div class="sg-page">
 <main id="main">
 <h1 id="version-history">Version history</h1>
-<p>Every change that lands on <code>main</code> is a version, in <code>tools/version.json</code>, tagged by the deploy and shown in the header of every page. The <code>release</code> column is the cut of the code a site pins; it moves only when a served file changes.</p>
+<p>Every change that lands on <code>dev</code> is a version, in <code>tools/version.json</code>, tagged by the deploy and shown in the header of every page. The <code>release</code> column is the cut of the code a site pins; it moves only when a served file changes.</p>
 <table><thead><tr><th>Version</th><th>Date</th><th>Kind</th><th>What changed, and why</th></tr></thead><tbody><tr><td><strong>v0.1.0</strong></td><td>2026-10-20</td><td>release</td><td><strong>the first release: the modules send.sgit.ai runs, as one independent directory, with its tests and the server in memory.</strong> From the four voice memos of 20 October 2026 (the brief, published in full). The modules: AES-256-GCM crypto with the SGMETA envelope, friendly tokens with the derivations send.sgraph.ai uses, the link grammar, the transfer client with send() and receive(), QR codes as SVG, the vault layer over the vendored library (publish with compare-and-swap, never push()), and the per-device keyring. 43 tests run in Node against the in-memory server; a browser smoke test runs the same modules in Chromium. The website, the gate and the release tooling come with it.</td></tr></tbody></table>
 </main>
 

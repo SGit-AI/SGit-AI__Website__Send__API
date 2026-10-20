@@ -8,7 +8,7 @@ deploy but files. Current version v0.1.0.
 
 - **The release:** [`releases/v0.1.0/`](releases/v0.1.0/README.md), a complete, independent copy of the code: `send/`
   (ten ES modules), `vendor/` (the vault library v0.2.3 and qrcode-generator 2.0.4, unchanged and hashed), `tests/`
-  (43 tests and the SG/Send API in memory) and `manifest.json`. Never edited after it is on `main`; a change is the
+  (43 tests and the SG/Send API in memory) and `manifest.json`. Never edited after it is on `dev`; a change is the
   next directory.
 - **The website:** `website/` is the source (markdown pages with front matter, `site.json`, the assets); `www/` is what
   `python3 tools/build.py` writes and is committed; the deploy serves it at the root beside the releases.
@@ -29,7 +29,7 @@ node releases/v0.1.0/tests/server.mjs 8787 local-dev-token   # the API in memory
 python3 tools/release.py cut v0.1.1         # the manifest of a new release
 ```
 
-Every change that lands on `main` is a version (`tools/version.json`); the deploy tags it, publishes, and then asks the
+Every change that lands on `dev` is a version (`tools/version.json`); the deploy tags it, publishes, and then asks the
 live host for the hash of every file of the current release. The rules a contributor or an agent follows are on the
 site at `/agents/`; the release discipline at `/docs/versioning/`.
 

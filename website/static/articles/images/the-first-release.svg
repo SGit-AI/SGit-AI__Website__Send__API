@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" font-family="system-ui, sans-serif" font-size="14">
+<rect width="900" height="360" fill="#1A1A2E"/>
+<g><rect x="30" y="30" width="270" height="300" rx="8" fill="#16213E" stroke="#2C3E6B"/><text x="45" y="60" fill="#4ECDC4" font-size="16" font-weight="700">What it is</text>
+<text x="45" y="95" fill="#FFFFFF" font-size="28" font-weight="700">34 files</text><text x="45" y="120" fill="#8892A0">270,337 bytes, one directory</text>
+<text x="45" y="155" fill="#E0E0E0">10 modules, one import</text><text x="45" y="178" fill="#E0E0E0">2 vendored libraries, hashed</text><text x="45" y="201" fill="#E0E0E0">1 manifest, every SHA-256</text><text x="45" y="224" fill="#E0E0E0">1 server, in memory</text>
+<text x="45" y="270" fill="#8892A0">pinned at</text><text x="45" y="292" fill="#4ECDC4" font-size="12">api.send.sgit.ai/v0.1.0/</text></g>
+<g><rect x="315" y="30" width="270" height="300" rx="8" fill="#16213E" stroke="#2C3E6B"/><text x="330" y="60" fill="#4ECDC4" font-size="16" font-weight="700">How it is tested</text>
+<text x="330" y="95" fill="#FFFFFF" font-size="28" font-weight="700">43 tests</text><text x="330" y="120" fill="#8892A0">Node, no mocks, ~4 seconds</text>
+<text x="330" y="155" fill="#E0E0E0">byte-identical round trip</text><text x="330" y="178" fill="#E0E0E0">the name in no request</text><text x="330" y="201" fill="#E0E0E0">410 after the cap, 403 then 404</text><text x="330" y="224" fill="#E0E0E0">real vaults, two clients racing</text><text x="330" y="247" fill="#E0E0E0">twelve hashes checked first</text>
+<text x="330" y="292" fill="#8892A0">+ a browser run in Chromium</text></g>
+<g><rect x="600" y="30" width="270" height="300" rx="8" fill="#16213E" stroke="#E0B84E"/><text x="615" y="60" fill="#E0B84E" font-size="16" font-weight="700">What it does not prove</text>
+<text x="615" y="95" fill="#E0E0E0">the round trip against the</text><text x="615" y="115" fill="#E0E0E0">live send.sgraph.ai (needs a token)</text>
+<text x="615" y="150" fill="#E0E0E0">uploads over 4 MB (presigned)</text><text x="615" y="180" fill="#E0E0E0">signed commits (library writes null)</text><text x="615" y="210" fill="#E0E0E0">keys encrypted at rest (keyring</text><text x="615" y="230" fill="#E0E0E0">is plaintext in the browser)</text>
+<text x="615" y="292" fill="#8892A0">all marked in the reality file</text></g>
+<text x="30" y="352" fill="#8892A0" font-size="12">api.send.sgit.ai v0.1.0, 20 October 2026, CC BY 4.0</text>
+</svg>

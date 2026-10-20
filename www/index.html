@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>api.send.sgit.ai, the client-side API behind send.sgit.ai</title>
+<meta name="description" content="Encrypt, envelope, transfer, vault, QR and keyring modules, published as independent, versioned, never-edited releases a page pins by address. No server, nothing to deploy but files.">
+<link rel="canonical" href="https://api.send.sgit.ai/">
+<link rel="alternate" type="text/markdown" href="/index.md">
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="api.send.sgit.ai">
+<meta property="og:title" content="api.send.sgit.ai, the client-side API behind send.sgit.ai">
+<meta property="og:description" content="Encrypt, envelope, transfer, vault, QR and keyring modules, published as independent, versioned, never-edited releases a page pins by address. No server, nothing to deploy but files.">
+<meta property="og:url" content="https://api.send.sgit.ai/">
+<script src="/assets/theme.js"></script>
+<link rel="stylesheet" href="/assets/themes.css">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/nav.js" defer></script>
+
+</head>
+<body data-page="/">
+<header class="sg-header">
+<nav class="site" aria-label="Site">
+<div class="row">
+<a class="brand" href="/">api.send<span>.sgit.ai</span></a>
+<a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, git for encrypted vaults">&#8599; part of <b>sgit.ai</b></a>
+<span class="stage-pill">v0.1.0, first release</span>
+<a class="sg-badge ver" href="/versions/" data-version="v0.1.0" title="released 2026-10-20">v0.1.0</a>
+<button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+<div class="nav-items"><div class="ni ni-has"><a class="nl" href="/start/">Start<span class="caret">&#9662;</span></a><div class="sub"><a class="sl" href="/start/">Quick start: send a file from a page</a><a class="sl" href="/for-developers/">For developers</a><a class="sl" href="/agents/">For agents</a><a class="sl" href="/for-evaluators/">For evaluators</a></div></div><div class="ni ni-has"><a class="nl" href="/docs/">Reference<span class="caret">&#9662;</span></a><div class="sub"><a class="sl" href="/docs/">The modules</a><a class="sl" href="/docs/contracts/">Contracts: links, envelope, tokens</a><a class="sl" href="/docs/server/">The server it speaks to</a><a class="sl" href="/docs/hosting/">Hosting and pinning</a><a class="sl" href="/docs/versioning/">Versioning: independent releases</a></div></div><div class="ni ni-has"><a class="nl" href="/releases/">Releases<span class="caret">&#9662;</span></a><div class="sub"><a class="sl" href="/releases/">Releases, with manifests</a><a class="sl" href="/versions/">Version history</a><a class="sl" href="/how-to/make-a-release/">How to make a release</a><a class="sl" href="/how-to/run-the-tests/">How to run the tests</a></div></div><div class="ni"><a class="nl" href="/articles/">Articles</a></div><div class="ni ni-has"><a class="nl" href="/about/">About<span class="caret">&#9662;</span></a><div class="sub"><a class="sl" href="/about/">About this repository</a><a class="sl" href="/about/brief/">The brief, in full</a><a class="sl" href="/about/corrections/">Brief corrections</a><a class="sl" href="/about/reality/">Reality: what exists</a><a class="sl" href="/about/team/">The team</a><a class="sl" href="/about/needs/">What needs a human</a><a class="sl" href="/about/participant/">Participant disclosure</a></div></div><div class="ni ni-has ni-theme"><button class="nl" type="button" aria-haspopup="true">Theme<span class="caret">&#9662;</span></button><div class="sub" role="group" aria-label="Theme"><button class="sl" type="button" data-theme-pick="night" aria-pressed="false"><b>Night</b><small>Dark, teal</small></button><button class="sl" type="button" data-theme-pick="day" aria-pressed="false"><b>Day</b><small>Light, teal</small></button><small class="sub-note">Kept in this browser only, as <code>sgit.send.api.ui.theme</code>; nothing else is stored.</small></div></div></div>
+</div>
+</nav>
+</header>
+
+<div class="sg-page">
+<main id="main">
+<h1 id="the-api-behind-send-sgit-ai-as-files-a-page-pins">The API behind send.sgit.ai, as files a page pins</h1>
+<p class="sg-lead">Everything <a href="https://send.sgit.ai">send.sgit.ai</a> does in the browser lives here: encrypting a file, keeping its name inside the ciphertext, uploading it as one transfer or committing it into a vault, turning the link into a QR code, and remembering the keys on the device. It is published at a versioned address, <code>/v0.1.0/</code>, that is never edited once it is on the default branch, with a manifest of the SHA-256 of every file. Any page, on any site, can import it.</p>
+<pre><code class="language-html">&lt;script type=&quot;module&quot;&gt;
+  import * as send from &#x27;https://api.send.sgit.ai/v0.1.0/send/send-api.js&#x27;
+  const api = new send.SendTransfers({ endpoint: &#x27;https://send.sgraph.ai&#x27;, accessToken })
+  const r   = await api.send({ bytes, filename: &#x27;report.pdf&#x27; })
+  const url = send.link.transferLink({ openUrl: &#x27;https://send.sgit.ai/open/&#x27;, transferId: r.transferId, key: r.keyString })
+  document.querySelector(&#x27;#qr&#x27;).innerHTML = send.qr.toSvg(url)
+&lt;/script&gt;</code></pre>
+<div class="cards">
+<div class="card"><h3><a href="/start/">Quick start</a></h3><p>Send a file from a page in twelve lines, and open it from a link. The access token, the key and the link, each in its place.</p></div>
+<div class="card"><h3><a href="/docs/">The modules</a></h3><p>Ten modules, one import. What each does, what it returns, and the error codes a caller is expected to act on.</p></div>
+<div class="card"><h3><a href="/docs/versioning/">Independent releases</a></h3><p>Every minor release is a complete copy of the code. No overlays, no shared files between versions, and a change is always the next directory.</p></div>
+<div class="card"><h3><a href="/for-evaluators/">For evaluators</a></h3><p>What leaves the browser and what never does, the two secrets that must not be confused, the vendored code and its hashes, and how to check the live host yourself.</p></div>
+</div>
+<h2 id="what-it-is-in-one-table">What it is, in one table</h2>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>An API with no server</strong></td><td>"API" here means client-side: the modules, formats and contracts a browser runs. This host serves files over GitHub Pages and receives nothing. The server the modules talk to is the SG/Send API at <code>send.sgraph.ai</code>, or any host that serves the same routes, including <a href="/docs/server/">the one in memory</a> that the tests use</td></tr><tr><td><strong>One release, one directory</strong></td><td><code>/v0.1.0/</code> holds <code>send/</code> (the modules), <code>vendor/</code> (the vault library and the QR encoder, unchanged and hashed), <code>tests/</code> (co-located, runnable with Node and in a browser) and <code>manifest.json</code>. Nothing in it loads from another release or another host</td></tr><tr><td><strong>Pinned by address</strong></td><td>A consuming site names one release in a file, copies its manifest, and loads the code by its full address. Its own gate can then refuse a reference that is not pinned or not in the manifest</td></tr><tr><td><strong>Compatible with send.sgraph.ai</strong></td><td>The ciphertext layout, the SGMETA envelope, the friendly-token derivations and the link fragments are the ones send.sgraph.ai has shipped since its v0.2.x, so a transfer made here opens there and the other way round. Proved against the published contracts and the in-memory server; a round trip against the live host is still to run, and <a href="/about/reality/">the reality file</a> says so</td></tr><tr><td><strong>Tests that run against real things</strong></td><td>43 tests in Node against an in-memory implementation of the API, including real vaults made with the vendored library, two clients racing a publish, and the lazy-folder trap. No mocks</td></tr></tbody></table>
+<h2 id="where-it-sits-in-the-estate">Where it sits in the estate</h2>
+<p><a href="https://send.sgit.ai">send.sgit.ai</a> is the product: the pages, the examples, the articles and the commercial model. This host is the code they run, kept apart so it has releases of its own, a review boundary, and a way for a second site (or an agent, or a workflow) to say exactly which version it means. The same shape as <a href="https://api.newsroom.sgit.ai">api.newsroom.sgit.ai</a> for the newsroom, and the pattern is written up in <a href="/articles/independent-releases.html">the first article</a>. The brief it all started from is <a href="/about/brief/">published in full</a>, with <a href="/about/corrections/">its corrections beside it</a>.</p>
+</main>
+
+</div>
+<footer class="sg-footer">
+<p>api.send.sgit.ai · <a class="sg-badge ver" href="/versions/" data-version="v0.1.0" title="released 2026-10-20">v0.1.0</a> · released 2026-10-20 · <a href="/versions/">releases</a> · <a href="/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Send__API">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant/">who publishes this</a></p>
+<p>Everything in the repository is public; nothing in it is secret, and a leak tripwire in the gate checks that on every push. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0; vendored files keep their own licences. What is shipped, proposed or absent is in <a href="/about/reality/">the reality file</a>; if it is not listed there, it does not exist.</p>
+<p class="network">Part of the sgit.ai network: <a href="https://sgit.ai">sgit.ai</a> · <a href="https://send.sgit.ai">send.sgit.ai</a> (the site this API serves) · <a href="https://api.newsroom.sgit.ai">api.newsroom.sgit.ai</a> (the same pattern for the newsroom) · <a href="https://newsroom.sgit.ai">newsroom.sgit.ai</a> · <a href="https://secrets.sgit.ai">secrets.sgit.ai</a> · <a href="https://sgit.ai/network/">the full network</a></p>
+</footer>
+</body>
+</html>

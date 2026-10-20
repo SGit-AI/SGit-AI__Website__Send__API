@@ -1,0 +1,12 @@
+{
+  "versions": [
+    {
+      "version": "v0.1.0",
+      "release": "v0.1.0",
+      "date": "2026-10-20",
+      "kind": "release",
+      "title": "the first release: the modules send.sgit.ai runs, as one independent directory, with its tests and the server in memory",
+      "notes": "From the four voice memos of 20 October 2026 (the brief, published in full). The modules: AES-256-GCM crypto with the SGMETA envelope, friendly tokens with the derivations send.sgraph.ai uses, the link grammar, the transfer client with send() and receive(), QR codes as SVG, the vault layer over the vendored library (publish with compare-and-swap, never push()), and the per-device keyring. 43 tests run in Node against the in-memory server; a browser smoke test runs the same modules in Chromium. The website, the gate and the release tooling come with it."
+    }
+  ]
+}

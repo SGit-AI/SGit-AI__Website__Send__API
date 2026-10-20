@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contracts, the formats that must not drift, api.send.sgit.ai</title>
+<meta name="description" content="The byte layouts and string grammars this release shares with send.sgraph.ai and with sgit, each with where it came from and the test that holds it.">
+<link rel="canonical" href="https://api.send.sgit.ai/docs/contracts/">
+<link rel="alternate" type="text/markdown" href="/docs/contracts/index.md">
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="api.send.sgit.ai">
+<meta property="og:title" content="Contracts, the formats that must not drift, api.send.sgit.ai">
+<meta property="og:description" content="The byte layouts and string grammars this release shares with send.sgraph.ai and with sgit, each with where it came from and the test that holds it.">
+<meta property="og:url" content="https://api.send.sgit.ai/docs/contracts/">
+<script src="/assets/theme.js"></script>
+<link rel="stylesheet" href="/assets/themes.css">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/nav.js" defer></script>
+
+</head>
+<body data-page="/docs/contracts/">
+<header class="sg-header">
+<nav class="site" aria-label="Site">
+<div class="row">
+<a class="brand" href="/">api.send<span>.sgit.ai</span></a>
+<a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, git for encrypted vaults">&#8599; part of <b>sgit.ai</b></a>
+<span class="stage-pill">v0.1.0, first release</span>
+<a class="sg-badge ver" href="/versions/" data-version="v0.1.0" title="released 2026-10-20">v0.1.0</a>
+<button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+<div class="nav-items"><div class="ni ni-has"><a class="nl" href="/start/">Start<span class="caret">&#9662;</span></a><div class="sub"><a class="sl" href="/start/">Quick start: send a file from a page</a><a class="sl" href="/for-developers/">For developers</a><a class="sl" href="/agents/">For agents</a><a class="sl" href="/for-evaluators/">For evaluators</a></div></div><div class="ni ni-has"><a class="nl here" href="/docs/">Reference<span class="caret">&#9662;</span></a><div class="sub"><a class="sl" href="/docs/">The modules</a><a class="sl here" href="/docs/contracts/">Contracts: links, envelope, tokens</a><a class="sl" href="/docs/server/">The server it speaks to</a><a class="sl" href="/docs/hosting/">Hosting and pinning</a><a class="sl" href="/docs/versioning/">Versioning: independent releases</a></div></div><div class="ni ni-has"><a class="nl" href="/releases/">Releases<span class="caret">&#9662;</span></a><div class="sub"><a class="sl" href="/releases/">Releases, with manifests</a><a class="sl" href="/versions/">Version history</a><a class="sl" href="/how-to/make-a-release/">How to make a release</a><a class="sl" href="/how-to/run-the-tests/">How to run the tests</a></div></div><div class="ni"><a class="nl" href="/articles/">Articles</a></div><div class="ni ni-has"><a class="nl" href="/about/">About<span class="caret">&#9662;</span></a><div class="sub"><a class="sl" href="/about/">About this repository</a><a class="sl" href="/about/brief/">The brief, in full</a><a class="sl" href="/about/corrections/">Brief corrections</a><a class="sl" href="/about/reality/">Reality: what exists</a><a class="sl" href="/about/team/">The team</a><a class="sl" href="/about/needs/">What needs a human</a><a class="sl" href="/about/participant/">Participant disclosure</a></div></div><div class="ni ni-has ni-theme"><button class="nl" type="button" aria-haspopup="true">Theme<span class="caret">&#9662;</span></button><div class="sub" role="group" aria-label="Theme"><button class="sl" type="button" data-theme-pick="night" aria-pressed="false"><b>Night</b><small>Dark, teal</small></button><button class="sl" type="button" data-theme-pick="day" aria-pressed="false"><b>Day</b><small>Light, teal</small></button><small class="sub-note">Kept in this browser only, as <code>sgit.send.api.ui.theme</code>; nothing else is stored.</small></div></div></div>
+</div>
+</nav>
+</header>
+<nav class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/docs/">The modules</a> / Contracts, the formats that must not drift</nav>
+<div class="sg-page with-toc">
+<main id="main">
+<h1 id="contracts-links-envelope-tokens-keys">Contracts: links, envelope, tokens, keys</h1>
+<p>These are the parts that have to match on both ends: a sender on one site, a reader on another, a CLI on a laptop. Each one names its source and the test that holds it. A change to any of them is a new major version of this API and a conversation with the owners of the other end.</p>
+<h2 id="ciphertext">The ciphertext</h2>
+<pre><code>IV                 12 bytes    random, fresh per encryption, prepended
+ciphertext + tag   rest        AES-256-GCM; GCM appends its own 16-byte tag</code></pre>
+<p>Exactly what <code>crypto.subtle.encrypt</code> returns with the IV in front, so a payload is 28 bytes larger than its plaintext. The key is 32 random bytes, shared as unpadded base64url, 43 characters. Source: send.sgraph.ai since v0.1.0, documented at <a href="https://sgit.ai/api/transfers.html">sgit.ai/api/transfers</a>. Held by <code>tests/crypto.test.mjs</code>.</p>
+<h2 id="envelope">The envelope</h2>
+<pre><code>&quot;SGMETA\0&quot;       7 bytes    53 47 4D 45 54 41 00
+meta_len         4 bytes    uint32, big-endian
+metadata JSON    meta_len   {&quot;filename&quot;: &quot;...&quot;} UTF-8
+file bytes       rest</code></pre>
+<p>Wrapped before encrypting, so the name is inside the ciphertext. Getting the order wrong produces a corrupt download with no name. Held by <code>tests/crypto.test.mjs</code> (magic, length, round trip) and <code>tests/transfers.test.mjs</code> (the name appears in no request and not in the stored bytes).</p>
+<h2 id="friendly">Friendly tokens</h2>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>Shape</td><td><code>word-word-DDDD</code>, two words from the 320-word list and four digits, <code>/^[a-z]+-[a-z]+-\d{4}$/</code></td></tr><tr><td>Transfer id</td><td>the first 12 hex characters of <code>SHA-256(token)</code></td></tr><tr><td>Key</td><td><code>PBKDF2-HMAC-SHA256(token, salt "sgraph-send-v1", 600000)</code>, 256 bits</td></tr><tr><td>Create</td><td>the client sends <code>transfer_id</code> in the create body; the server refuses an id that exists</td></tr></tbody></table>
+<p>Source: send.sgraph.ai <code>friendly-crypto.js</code> and <code>V026_WORDS</code>. Held by <code>tests/link.test.mjs</code> (the id computed independently) and <code>tests/transfers.test.mjs</code> (a token used twice is refused).</p>
+<h2 id="links">Links</h2>
+<p>The fragment, after <code>#</code>, split on the first <code>/</code>, truncated at <code>|</code>:</p>
+<table><thead><tr><th>Fragment</th><th>Means</th></tr></thead><tbody><tr><td><code>&lt;transfer_id&gt;/&lt;key&gt;</code></td><td>a transfer and its 43-character key</td></tr><tr><td><code>&lt;transfer_id&gt;</code></td><td>link only; the key travels by another channel</td></tr><tr><td><code>&lt;word-word-1234&gt;</code></td><td>a friendly token</td></tr><tr><td><code>&lt;prefix&gt;&lt;secret&gt;:&lt;vault_id&gt;</code></td><td>a vault credential; the prefix declares which</td></tr></tbody></table>
+<p><code>transfer_id</code> is <code>/^[a-z0-9]{8,32}$/i</code>; <code>vault_id</code> is <code>/^[a-z0-9]{4,24}$/</code>. Source: send.sgraph.ai's download page and sgit.ai's credentials page. Held by <code>tests/link.test.mjs</code>.</p>
+<h2 id="credentials">Vault credentials</h2>
+<table><thead><tr><th>Prefix</th><th>Declares</th><th>May be published</th></tr></thead><tbody><tr><td><code>sgit_private_vault_</code></td><td>a vault key, read and write</td><td>never</td></tr><tr><td><code>sgit_private_read_</code></td><td>a read key kept private</td><td>no; re-derive under the public prefix first</td></tr><tr><td><code>sgit_public_read_</code></td><td>a read key, deliberately published</td><td>yes</td></tr><tr><td><code>sgit_vk1_</code>, <code>sgit_rk1_</code></td><td>legacy forms, accepted, never emitted</td><td>as above</td></tr></tbody></table>
+<p>Classification is by declaration first and shape second: a bare <code>&lt;64 hex&gt;:&lt;id&gt;</code> reads as a read key, anything else before the colon is a passphrase, which is write access. Source: <a href="https://sgit.ai/docs/credentials.html">sgit.ai/docs/credentials</a> and the vendored <code>SGVaultCrypto.classifyKey</code>. Held by <code>tests/link.test.mjs</code>.</p>
+<h2 id="vault">The vault objects</h2>
+<p>The vendored library owns this contract and this release does not restate it: read key and write key derived by PBKDF2 from the passphrase and the vault id, <code>obj-cas-imm-</code> content-addressed objects, <code>ref-pid-muw-</code> refs, one <code>POST /batch</code> per commit, compare-and-swap on publish. <a href="https://sgit.ai/docs/vault/vault-from-javascript.html">Creating and writing a vault from JavaScript</a> is the reference; <code>tests/vault.test.mjs</code> proves create, write, publish, race and reopen against the in-memory server, and the hashes of the twelve files before any of it.</p>
+<h2 id="keyring">The keyring document</h2>
+<pre><code class="language-json">{ &quot;version&quot;: 1, &quot;entries&quot;: [ { &quot;id&quot;, &quot;kind&quot;, &quot;label&quot;, &quot;value&quot;, &quot;created&quot;, ...meta } ] }</code></pre>
+<p><code>kind</code> is one of <code>sgit-vault-key</code>, <code>sgit-read-key</code>, <code>send-transfer</code>, <code>send-access-token</code>. The document is this release's own format; <code>exportJson()</code> adds <code>exported</code> and <code>origin</code>. Held by <code>tests/keyring.test.mjs</code>.</p>
+</main>
+<nav class="sg-toc" aria-label="On this page"><p>On this page</p><ul><li><a href="#ciphertext">The ciphertext</a></li><li><a href="#envelope">The envelope</a></li><li><a href="#friendly">Friendly tokens</a></li><li><a href="#links">Links</a></li><li><a href="#credentials">Vault credentials</a></li><li><a href="#vault">The vault objects</a></li><li><a href="#keyring">The keyring document</a></li></ul></nav>
+</div>
+<footer class="sg-footer">
+<p>api.send.sgit.ai · <a class="sg-badge ver" href="/versions/" data-version="v0.1.0" title="released 2026-10-20">v0.1.0</a> · released 2026-10-20 · <a href="/versions/">releases</a> · <a href="/docs/contracts/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Send__API">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant/">who publishes this</a></p>
+<p>Everything in the repository is public; nothing in it is secret, and a leak tripwire in the gate checks that on every push. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0; vendored files keep their own licences. What is shipped, proposed or absent is in <a href="/about/reality/">the reality file</a>; if it is not listed there, it does not exist.</p>
+<p class="network">Part of the sgit.ai network: <a href="https://sgit.ai">sgit.ai</a> · <a href="https://send.sgit.ai">send.sgit.ai</a> (the site this API serves) · <a href="https://api.newsroom.sgit.ai">api.newsroom.sgit.ai</a> (the same pattern for the newsroom) · <a href="https://newsroom.sgit.ai">newsroom.sgit.ai</a> · <a href="https://secrets.sgit.ai">secrets.sgit.ai</a> · <a href="https://sgit.ai/network/">the full network</a></p>
+</footer>
+</body>
+</html>

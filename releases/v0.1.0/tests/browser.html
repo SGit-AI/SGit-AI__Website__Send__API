@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>api.send.sgit.ai v0.1.0, browser smoke test</title>
+<style>body{font-family:system-ui,sans-serif;max-width:60rem;margin:2rem auto;padding:0 1rem}li.ok{color:#0a7}li.fail{color:#c22}#qr svg{width:160px;height:160px}</style>
+</head>
+<body>
+<h1>api.send.sgit.ai v0.1.0: the modules on a page</h1>
+<p>Give the page the API endpoint and the access token in the query string: <code>?endpoint=http://localhost:8787&amp;token=local-dev-token</code>. Nothing here is stored or sent anywhere but that endpoint.</p>
+<ul id="results"></ul>
+<div id="qr"></div>
+<script type="module">
+    import * as send from '../send/send-api.js'
+    const q = new URLSearchParams(location.search)
+    const endpoint = q.get('endpoint') || 'http://localhost:8787'
+    const token = q.get('token') || 'local-dev-token'
+    const ul = document.querySelector('#results')
+    const results = []
+    const check = (ok, what) => { results.push({ ok, what }); const li = document.createElement('li'); li.className = ok ? 'ok' : 'fail'; li.textContent = `${ok ? 'ok' : 'FAIL'} ${what}`; ul.appendChild(li) }
+    try {
+        check(send.VERSION === 'v0.1.0', `VERSION is ${send.VERSION}`)
+        const key = await send.crypto.generateKey()
+        const ct = await send.crypto.encryptBytes(key, 'hello from a page')
+        check(new TextDecoder().decode(await send.crypto.decryptBytes(key, ct)) === 'hello from a page', 'encrypt and decrypt on the page')
+        const url = send.link.transferLink({ openUrl: location.origin + '/open/', transferId: 'abc123def456', key: await send.crypto.exportKey(key) })
+        document.querySelector('#qr').innerHTML = send.qr.toSvg(url, { title: url })
+        check(document.querySelector('#qr svg path') !== null, 'a QR code is drawn as SVG')
+        const api = new send.SendTransfers({ endpoint, accessToken: token })
+        const r = await api.send({ bytes: new TextEncoder().encode('transfer from a page'), filename: 'page.txt' })
+        const got = await new send.SendTransfers({ endpoint }).receive({ transferId: r.transferId, keyString: r.keyString })
+        check(got.filename === 'page.txt' && new TextDecoder().decode(got.bytes) === 'transfer from a page', 'a transfer round-trips through the server')
+        const ring = new send.Keyring()
+        ring.add({ kind: send.KEYRING_KINDS.TRANSFER, label: 'page.txt', value: `${r.transferId}/${r.keyString}` })
+        check(ring.list().length >= 1, 'the keyring stores in localStorage')
+        await send.vault.ready()
+        check(typeof globalThis.SGVault === 'object' || typeof globalThis.SGVault === 'function', 'the vault library loads from this release')
+        const sg = send.vault.client({ endpoint, accessToken: token })
+        const { vault, vaultKey, readKey } = await send.vault.createVault(sg, { name: 'page vault' })
+        await send.vault.writeFile(vault, '/notes', 'a.md', '# from a page')
+        await send.vault.publish(vault)
+        const ro = await send.vault.openReadOnly(sg, readKey)
+        check((await send.vault.readText(ro, '/notes', 'a.md')) === '# from a page', 'a vault is created, written, published and read back with its read key')
+        check(/^sgit_private_vault_/.test(vaultKey) && /^sgit_public_read_/.test(readKey), 'the credentials carry their prefixes')
+    } catch (e) {
+        check(false, `error: ${e.message}`)
+    }
+    window.__results = results
+    document.body.setAttribute('data-done', 'true')
+</script>
+</body>
+</html>

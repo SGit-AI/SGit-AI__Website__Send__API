@@ -1,0 +1,74 @@
+# main, the default branch, is the release branch: gate, tag the version, publish api.send.sgit.ai (www/ at the root,
+# every release directory beside it), then ask the live host for the hash of every file of the current release.
+# Pages for this repository deploys from GitHub Actions (configure-pages enables it). Green does not mean live:
+# the last job fails the run if the host does not serve the release.
+name: deploy-pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 tools/check.py
+      - run: for r in releases/v*/; do (cd "$r" && node --test 'tests/*.test.mjs'); done
+  tag:
+    needs: gate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+      - name: Tag the version, once
+        run: |
+          set -euo pipefail
+          v=$(python3 -c 'import json;print(json.load(open("tools/version.json"))["version"])')
+          if git rev-parse -q --verify "refs/tags/$v" >/dev/null; then
+            if [ "$(git rev-list -n1 $v)" != "$GITHUB_SHA" ]; then echo "::error::$v is already tagged on another commit: bump the version"; exit 1; fi
+            echo "$v already tags this commit"
+          else
+            git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git tag -a "$v" -m "api.send.sgit.ai $v" && git push origin "$v"
+          fi
+  deploy:
+    needs: [gate, tag]
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assemble the Pages tree
+        run: python3 tools/release.py site --out _site
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4
+  verify-live:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: The live host serves every file of the current release, byte for byte
+        run: python3 tools/live_check.py

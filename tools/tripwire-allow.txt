@@ -1,0 +1,2 @@
+# Matches of the leak tripwire that are reviewed and kept, one per line, with the reason. Anything else matching fails the gate.
+sgit_private_vault_abcdefghijklmnopqrstuvwx:ab12cd34   # releases/v0.1.0/tests/link.test.mjs: a made-up vault key, parsed and never used; no such vault exists

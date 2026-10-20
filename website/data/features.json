@@ -1,0 +1,51 @@
+{
+  "audited": "2026-10-20, v0.1.0, by reading releases/v0.1.0 and running its tests",
+  "sections": [
+    { "title": "The release", "features": [
+      { "feature": "A release directory that is a complete, independent copy: nothing in it loads from another version or another host", "status": "shipped", "since": "v0.1.0", "evidence": "`releases/v0.1.0/`; `tools/release.py check` fails on a reference outside the directory only by hash, see the note in corrections" },
+      { "feature": "A manifest with the SHA-256 of every file, recomputed by the gate", "status": "shipped", "since": "v0.1.0", "evidence": "`releases/v0.1.0/manifest.json`, `tools/release.py check`" },
+      { "feature": "The live host checked file by file after a deploy", "status": "shipped", "since": "v0.1.0", "evidence": "`tools/live_check.py`, the verify-live job; not yet run, the host has no DNS yet (see needs)" },
+      { "feature": "Presigned or multipart uploads for payloads over 4 MB", "status": "proposed", "since": "", "evidence": "`send-transfers.js` refuses with ETOOLARGE; the server route exists on send.sgraph.ai" }
+    ]},
+    { "title": "Crypto and envelope", "features": [
+      { "feature": "AES-256-GCM encrypt and decrypt, IV in front, keys as 43-character base64url", "status": "shipped", "since": "v0.1.0", "evidence": "`send/send-crypto.js`, `tests/crypto.test.mjs`" },
+      { "feature": "The SGMETA envelope: the file name inside the plaintext", "status": "shipped", "since": "v0.1.0", "evidence": "`send/send-envelope.js`, `tests/crypto.test.mjs`" },
+      { "feature": "PBKDF2 derivation (600,000 rounds) for friendly tokens", "status": "shipped", "since": "v0.1.0", "evidence": "`send/send-crypto.js` deriveKeyPbkdf2, `tests/link.test.mjs`" },
+      { "feature": "Interoperability with send.sgraph.ai proved against the live host", "status": "proposed", "since": "", "evidence": "the formats match the published contracts (sgit.ai/api/transfers); a round trip against send.sgraph.ai needs an access token and has not been run from this repository" }
+    ]},
+    { "title": "Tokens and links", "features": [
+      { "feature": "Friendly tokens from the 320-word list, id and key derived as send.sgraph.ai derives them", "status": "shipped", "since": "v0.1.0", "evidence": "`send/send-friendly.js`, `send/send-words.js`" },
+      { "feature": "The link grammar: transfer with key, link only, friendly, vault key, read key; the | truncation", "status": "shipped", "since": "v0.1.0", "evidence": "`send/send-link.js`, `tests/link.test.mjs`" },
+      { "feature": "Credential classification by declared prefix first, shape second", "status": "shipped", "since": "v0.1.0", "evidence": "`send/send-link.js` classifyCredential, parseVaultCredential" }
+    ]},
+    { "title": "Transfers", "features": [
+      { "feature": "create, upload, complete, info, download, download-base64, delete", "status": "shipped", "since": "v0.1.0", "evidence": "`send/send-transfers.js`, `tests/transfers.test.mjs` against `tests/server.mjs`" },
+      { "feature": "send() and receive(): envelope, encrypt, the three calls; download, decrypt, unwrap", "status": "shipped", "since": "v0.1.0", "evidence": "`tests/transfers.test.mjs`: byte-identical round trip, the name never in a request" },
+      { "feature": "Expiry, download caps, and opt-in revocation with a delete secret", "status": "shipped", "since": "v0.1.0", "evidence": "`tests/transfers.test.mjs`: 410 after the cap, 403 then 404 on delete" },
+      { "feature": "Coded errors: EAUTH, EGONE, ENOTFOUND, EDECRYPT, EKEY, ETOOLARGE, ENETWORK, EEDGE", "status": "shipped", "since": "v0.1.0", "evidence": "`send/send-transfers.js` TransferError" }
+    ]},
+    { "title": "Vaults", "features": [
+      { "feature": "The vault library v0.2.3 vendored unchanged, twelve files hashed against VENDOR.md", "status": "shipped", "since": "v0.1.0", "evidence": "`vendor/sg-vault/v0.2.3/`, `tests/vault.test.mjs` checks every hash before loading" },
+      { "feature": "Create a vault, open with a vault key or a read key, write files as commits, read, list, history", "status": "shipped", "since": "v0.1.0", "evidence": "`send/send-vault.js`, `tests/vault.test.mjs`" },
+      { "feature": "Publish with compare-and-swap, merge on ECAS; the lazy-folder trap avoided", "status": "shipped", "since": "v0.1.0", "evidence": "`tests/vault.test.mjs`: two clients race, both changes survive" },
+      { "feature": "Per-device clone branch, made once", "status": "shipped", "since": "v0.1.0", "evidence": "`send/send-vault.js` cloneBranch" },
+      { "feature": "Signed commits and format 2 object ids (sgit 0.19 to 0.21)", "status": "absent", "since": "", "evidence": "the vendored library writes signature: null; a vault that requires signatures must not be written from the browser" },
+      { "feature": "Vault creation and writes proved against the live host", "status": "proposed", "since": "", "evidence": "tests run against the in-memory server, which implements the documented routes; a live run needs an access token" }
+    ]},
+    { "title": "QR codes", "features": [
+      { "feature": "A link as a QR code, SVG, drawn in the browser, themed with currentColor", "status": "shipped", "since": "v0.1.0", "evidence": "`send/send-qr.js`, `tests/qr.test.mjs`; qrcode-generator 2.0.4 vendored and hashed" },
+      { "feature": "Scanning a QR code with the device camera", "status": "proposed", "since": "", "evidence": "a phone's camera app opens the link; in-page scanning is not built" }
+    ]},
+    { "title": "Keyring", "features": [
+      { "feature": "A per-device keyring in localStorage with a kind on every entry; export and import", "status": "shipped", "since": "v0.1.0", "evidence": "`send/send-keyring.js`, `tests/keyring.test.mjs`" },
+      { "feature": "Keys at rest encrypted, unlocked by a passkey", "status": "proposed", "since": "", "evidence": "secrets.sgit.ai's design; this keyring is plaintext in the browser's storage and says so" },
+      { "feature": "Handing a vault key to a registry over an append lane", "status": "proposed", "since": "", "evidence": "the flow in sgit.ai/docs/send-a-vault-key; not built here" }
+    ]},
+    { "title": "The website and the pipeline", "features": [
+      { "feature": "Every page with a markdown twin, llms.txt, llms-full.txt, sitemap; chrome injected at build", "status": "shipped", "since": "v0.1.0", "evidence": "`tools/sitekit.py`, `www/`" },
+      { "feature": "The gate: build is committed, manifests match, links, twins, origins, tripwire, prose, version", "status": "shipped", "since": "v0.1.0", "evidence": "`tools/check.py`, `.github/workflows/ci.yml`" },
+      { "feature": "Deploy to GitHub Pages on main, tag, then verify the live host", "status": "shipped", "since": "v0.1.0", "evidence": "`.github/workflows/deploy-pages.yml`; the first run waits on Pages and DNS (see needs)" },
+      { "feature": "A review/ folder with the project as layered graphs", "status": "proposed", "since": "", "evidence": "`review/intent/` holds the brief as sections; the derived graph and the navigator are not built" }
+    ]}
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "name": "api.send.sgit.ai",
+  "brand": ["api.send", ".sgit.ai"],
+  "host": "https://api.send.sgit.ai",
+  "cname": "api.send.sgit.ai",
+  "description": "The client-side API behind send.sgit.ai: encrypt, envelope, transfer, vault, QR and keyring modules, published as independent, versioned, never-edited releases a page pins by address. No server, nothing to deploy but files.",
+  "stage": "v0.1.0, first release",
+  "source": "https://github.com/SGit-AI/SGit-AI__Website__Send__API",
+  "parent": { "name": "sgit.ai", "href": "https://sgit.ai", "title": "sgit.ai: the parent project, git for encrypted vaults" },
+  "theme_key": "sgit.send.api.ui.theme",
+  "footer": "Everything in the repository is public; nothing in it is secret, and a leak tripwire in the gate checks that on every push. Content <a href=\"https://creativecommons.org/licenses/by/4.0/\">CC BY 4.0</a>, code Apache-2.0; vendored files keep their own licences. What is shipped, proposed or absent is in <a href=\"/about/reality/\">the reality file</a>; if it is not listed there, it does not exist.",
+  "network": "Part of the sgit.ai network: <a href=\"https://sgit.ai\">sgit.ai</a> · <a href=\"https://send.sgit.ai\">send.sgit.ai</a> (the site this API serves) · <a href=\"https://api.newsroom.sgit.ai\">api.newsroom.sgit.ai</a> (the same pattern for the newsroom) · <a href=\"https://newsroom.sgit.ai\">newsroom.sgit.ai</a> · <a href=\"https://secrets.sgit.ai\">secrets.sgit.ai</a> · <a href=\"https://sgit.ai/network/\">the full network</a>",
+  "llms_intro": "This host publishes the client-side code send.sgit.ai runs, as releases at /vX.Y.Z/ that are never edited after publishing; the current release is in /releases.json. Source: https://github.com/SGit-AI/SGit-AI__Website__Send__API",
+  "llms_extra": [
+    "[The current release's manifest](/v0.1.0/manifest.json): every file with its size and SHA-256",
+    "[The release's README](/v0.1.0/README.md): the modules and what each does",
+    "[releases.json](/releases.json): every release, newest first"
+  ],
+  "nav": [
+    { "title": "Start", "href": "/start/", "items": [
+      { "title": "Quick start: send a file from a page", "href": "/start/" },
+      { "title": "For developers", "href": "/for-developers/" },
+      { "title": "For agents", "href": "/agents/" },
+      { "title": "For evaluators", "href": "/for-evaluators/" }
+    ]},
+    { "title": "Reference", "href": "/docs/", "items": [
+      { "title": "The modules", "href": "/docs/" },
+      { "title": "Contracts: links, envelope, tokens", "href": "/docs/contracts/" },
+      { "title": "The server it speaks to", "href": "/docs/server/" },
+      { "title": "Hosting and pinning", "href": "/docs/hosting/" },
+      { "title": "Versioning: independent releases", "href": "/docs/versioning/" }
+    ]},
+    { "title": "Releases", "href": "/releases/", "items": [
+      { "title": "Releases, with manifests", "href": "/releases/" },
+      { "title": "Version history", "href": "/versions/" },
+      { "title": "How to make a release", "href": "/how-to/make-a-release/" },
+      { "title": "How to run the tests", "href": "/how-to/run-the-tests/" }
+    ]},
+    { "title": "Articles", "href": "/articles/" },
+    { "title": "About", "href": "/about/", "items": [
+      { "title": "About this repository", "href": "/about/" },
+      { "title": "The brief, in full", "href": "/about/brief/" },
+      { "title": "Brief corrections", "href": "/about/corrections/" },
+      { "title": "Reality: what exists", "href": "/about/reality/" },
+      { "title": "The team", "href": "/about/team/" },
+      { "title": "What needs a human", "href": "/about/needs/" },
+      { "title": "Participant disclosure", "href": "/about/participant/" }
+    ]}
+  ]
+}

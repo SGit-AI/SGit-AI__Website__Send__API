@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The modules, api.send.sgit.ai</title>
+<meta name="description" content="The ten modules of a release, what each exports, and the error codes a caller is expected to act on.">
+<link rel="canonical" href="https://api.send.sgit.ai/docs/">
+<link rel="alternate" type="text/markdown" href="/docs/index.md">
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="api.send.sgit.ai">
+<meta property="og:title" content="The modules, api.send.sgit.ai">
+<meta property="og:description" content="The ten modules of a release, what each exports, and the error codes a caller is expected to act on.">
+<meta property="og:url" content="https://api.send.sgit.ai/docs/">
+<script src="/assets/theme.js"></script>
+<link rel="stylesheet" href="/assets/themes.css">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/nav.js" defer></script>
+
+</head>
+<body data-page="/docs/">
+<header class="sg-header">
+<nav class="site" aria-label="Site">
+<div class="row">
+<a class="brand" href="/">api.send<span>.sgit.ai</span></a>
+<a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, git for encrypted vaults">&#8599; part of <b>sgit.ai</b></a>
+<span class="stage-pill">v0.1.0, first release</span>
+<a class="sg-badge ver" href="/versions/" data-version="v0.1.0" title="released 2026-10-20">v0.1.0</a>
+<button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+<div class="nav-items"><div class="ni ni-has"><a class="nl" href="/start/">Start<span class="caret">&#9662;</span></a><div class="sub"><a class="sl" href="/start/">Quick start: send a file from a page</a><a class="sl" href="/for-developers/">For developers</a><a class="sl" href="/agents/">For agents</a><a class="sl" href="/for-evaluators/">For evaluators</a></div></div><div class="ni ni-has"><a class="nl here" href="/docs/">Reference<span class="caret">&#9662;</span></a><div class="sub"><a class="sl here" href="/docs/">The modules</a><a class="sl" href="/docs/contracts/">Contracts: links, envelope, tokens</a><a class="sl" href="/docs/server/">The server it speaks to</a><a class="sl" href="/docs/hosting/">Hosting and pinning</a><a class="sl" href="/docs/versioning/">Versioning: independent releases</a></div></div><div class="ni ni-has"><a class="nl" href="/releases/">Releases<span class="caret">&#9662;</span></a><div class="sub"><a class="sl" href="/releases/">Releases, with manifests</a><a class="sl" href="/versions/">Version history</a><a class="sl" href="/how-to/make-a-release/">How to make a release</a><a class="sl" href="/how-to/run-the-tests/">How to run the tests</a></div></div><div class="ni"><a class="nl" href="/articles/">Articles</a></div><div class="ni ni-has"><a class="nl" href="/about/">About<span class="caret">&#9662;</span></a><div class="sub"><a class="sl" href="/about/">About this repository</a><a class="sl" href="/about/brief/">The brief, in full</a><a class="sl" href="/about/corrections/">Brief corrections</a><a class="sl" href="/about/reality/">Reality: what exists</a><a class="sl" href="/about/team/">The team</a><a class="sl" href="/about/needs/">What needs a human</a><a class="sl" href="/about/participant/">Participant disclosure</a></div></div><div class="ni ni-has ni-theme"><button class="nl" type="button" aria-haspopup="true">Theme<span class="caret">&#9662;</span></button><div class="sub" role="group" aria-label="Theme"><button class="sl" type="button" data-theme-pick="night" aria-pressed="false"><b>Night</b><small>Dark, teal</small></button><button class="sl" type="button" data-theme-pick="day" aria-pressed="false"><b>Day</b><small>Light, teal</small></button><small class="sub-note">Kept in this browser only, as <code>sgit.send.api.ui.theme</code>; nothing else is stored.</small></div></div></div>
+</div>
+</nav>
+</header>
+<nav class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / The modules</nav>
+<div class="sg-page with-toc">
+<main id="main">
+<h1 id="the-modules">The modules</h1>
+<p>One import gives every module as a namespace, plus <code>VERSION</code> and <code>RELEASE</code>:</p>
+<pre><code class="language-js">import * as send from &#x27;https://api.send.sgit.ai/v0.1.0/send/send-api.js&#x27;
+send.VERSION                       // &#x27;v0.1.0&#x27;
+send.crypto, send.envelope, send.friendly, send.words, send.link, send.qr, send.vault
+send.SendTransfers, send.TransferError, send.Keyring, send.KEYRING_KINDS</code></pre>
+<p>Each module can also be imported on its own by its path under <code>send/</code>.</p>
+<h2 id="crypto-send-send-crypto-js">crypto, <code>send/send-crypto.js</code></h2>
+<table><thead><tr><th>Export</th><th>What it does</th></tr></thead><tbody><tr><td><code>generateKey()</code></td><td>A fresh AES-256-GCM key, extractable</td></tr><tr><td><code>exportKey(key)</code>, <code>importKey(str, usages)</code></td><td>The key as 43 characters of unpadded base64url, and back; <code>EKEY</code> if the length is wrong</td></tr><tr><td><code>encryptBytes(key, bytes)</code></td><td>`IV (12)</td><td></td><td>ciphertext</td><td></td><td>tag (16)`, a fresh IV every call</td></tr><tr><td><code>decryptBytes(key, bytes)</code></td><td>The plaintext, or <code>EDECRYPT</code></td></tr><tr><td><code>deriveKeyPbkdf2(passphrase, salt, iterations = 600000)</code></td><td>PBKDF2-HMAC-SHA256 to an AES key</td></tr><tr><td><code>sha256Hex</code>, <code>randomBytes</code>, <code>bytesToBase64url</code>, <code>base64urlToBytes</code>, <code>bytesToHex</code>, <code>toBytes</code>, <code>isKeyString</code></td><td>Helpers</td></tr><tr><td><code>OVERHEAD</code></td><td>28: an encrypted payload is exactly this much larger than its plaintext</td></tr></tbody></table>
+<h2 id="envelope-send-send-envelope-js">envelope, <code>send/send-envelope.js</code></h2>
+<p><code>wrap(meta, bytes)</code> puts <code>{ filename, ... }</code> in front of the file under the <code>SGMETA\0</code> magic; <code>unwrap(bytes)</code> returns <code>{ meta, bytes, enveloped }</code>. Bytes without an envelope come back whole with an empty meta, so an older transfer still opens. <a href="/docs/contracts/#envelope">The byte layout</a>.</p>
+<h2 id="friendly-send-send-friendly-js">friendly, <code>send/send-friendly.js</code></h2>
+<p><code>newFriendlyToken()</code> makes <code>word-word-1234</code> from the 320-word list in <code>send-words.js</code>; <code>isFriendlyToken(s)</code>; <code>deriveTransferId(token)</code> is the first 12 hex of SHA-256; <code>deriveKey(token)</code> is PBKDF2 with salt <code>sgraph-send-v1</code>. <code>COMBINATIONS</code> is 1,024,000,000.</p>
+<h2 id="link-send-send-link-js">link, <code>send/send-link.js</code></h2>
+<table><thead><tr><th>Export</th><th>What it does</th></tr></thead><tbody><tr><td><code>parseFragment(urlOrHash)</code></td><td><code>{ kind }</code> of <code>transfer</code> (with <code>transferId</code>, <code>key</code> or null), <code>friendly</code> (<code>token</code>), <code>vault-key</code> or <code>read-key</code> (<code>vaultId</code>, <code>secret</code>, <code>declared</code>), <code>empty</code>, <code>unknown</code>. Never throws</td></tr><tr><td><code>transferLink</code>, <code>friendlyLink</code>, <code>vaultLink</code></td><td>Build a link on an open page: <code>{ openUrl, ... }</code></td></tr><tr><td><code>classifyCredential(s)</code></td><td><code>vault</code>, <code>read-public</code>, <code>read-private</code> or <code>unknown</code>, by the declared prefix</td></tr><tr><td><code>parseVaultCredential(s)</code></td><td><code>{ kind: 'vault' or 'read', secret, vaultId, declared }</code>, prefix first, shape second</td></tr><tr><td><code>publicReadKey(hex, vaultId)</code>, <code>privateVaultKey(passphrase, vaultId)</code></td><td>The prefixed forms</td></tr></tbody></table>
+<h2 id="transfers-send-send-transfers-js">transfers, <code>send/send-transfers.js</code></h2>
+<p><code>new SendTransfers({ endpoint, accessToken })</code>. The three calls <code>create</code>, <code>upload</code>, <code>complete</code>; the public <code>info</code>, <code>download</code>, <code>downloadBase64</code>; <code>remove(id, deleteSecret)</code>; <code>health()</code>. The whole job: <code>send({ bytes, filename, friendlyToken, maxDownloads, expiresAt, revocable, onProgress })</code> returns <code>{ transferId, keyString, friendlyToken, encryptedBytes, deleteSecret }</code>; <code>receive({ transferId, keyString } or { friendlyToken })</code> returns <code>{ filename, meta, bytes }</code>.</p>
+<p>Errors are <code>TransferError</code> with a <code>code</code>:</p>
+<table><thead><tr><th>Code</th><th>When</th></tr></thead><tbody><tr><td><code>EAUTH</code></td><td>401: no access token, or a wrong one</td></tr><tr><td><code>EFORBIDDEN</code></td><td>403: for example a wrong delete secret</td></tr><tr><td><code>ENOTFOUND</code></td><td>404: never existed, or deleted. An end state, not a retry</td></tr><tr><td><code>EGONE</code></td><td>410: expired or exhausted. Also an end state</td></tr><tr><td><code>ETOOLARGE</code></td><td>A direct upload over 4 MB, refused before any request; or 413 from the server</td></tr><tr><td><code>EDECRYPT</code>, <code>EKEY</code></td><td>Wrong key; no key where one was needed</td></tr><tr><td><code>ENETWORK</code></td><td>The host could not be reached</td></tr><tr><td><code>EEDGE</code></td><td>The edge answered with an HTML page; the status cannot be trusted</td></tr></tbody></table>
+<h2 id="qr-send-send-qr-js">qr, <code>send/send-qr.js</code></h2>
+<p><code>toSvg(text, { ecc, margin, size, dark, light, title })</code> returns an SVG string with one path; <code>toDataUrl(text)</code> the same for an <code>&lt;img&gt;</code>; <code>modules(text)</code> the grid; <code>fits(text, ecc)</code>. Colours default to <code>currentColor</code> on a transparent background, so a code takes the page's theme.</p>
+<h2 id="vault-send-send-vault-js">vault, <code>send/send-vault.js</code></h2>
+<p><code>await ready()</code> loads the vendored library from this release; <code>client({ endpoint, accessToken })</code>; <code>createVault(sg, { name })</code> returns <code>{ vault, vaultId, vaultKey, readKey }</code>; <code>openVault(sg, vaultKey)</code> (a read key opens read-only); <code>openReadOnly(sg, readKey)</code>; <code>writeFile</code>, <code>writeFiles</code> (one commit for many files), <code>readFile</code>, <code>readText</code>, <code>listFolder</code>, <code>listAll</code>, <code>history</code>; <code>publish(vault)</code> with compare-and-swap and a merge on <code>ECAS</code>; <code>readKeyOf(vault)</code>; <code>randomPassphrase()</code>; <code>cloneBranch()</code>. Every folder is loaded before a write into it, which is the trap the sgit.ai page records.</p>
+<h2 id="keyring-send-send-keyring-js">keyring, <code>send/send-keyring.js</code></h2>
+<p><code>new Keyring({ storage })</code>, <code>KINDS</code> (<code>sgit-vault-key</code>, <code>sgit-read-key</code>, <code>send-transfer</code>, <code>send-access-token</code>), <code>list({ kind })</code>, <code>get</code>, <code>add({ kind, label, value, ...meta })</code>, <code>update</code>, <code>remove</code>, <code>clear</code>, <code>exportJson()</code>, <code>importJson(text)</code>. One JSON document under <code>send.sgit.ai.keyring.v1</code> in the page's localStorage, plaintext at rest, per device.</p>
+<h2 id="words-send-send-words-js">words, <code>send/send-words.js</code></h2>
+<p><code>WORDS</code>, frozen, 320 entries; <code>WORD_COUNT</code>; <code>COMBINATIONS</code>. The list send.sgraph.ai has used since v0.2.6, so a token made by either site opens on the other.</p>
+</main>
+<nav class="sg-toc" aria-label="On this page"><p>On this page</p><ul><li><a href="#crypto-send-send-crypto-js">crypto, send/send-crypto.js</a></li><li><a href="#envelope-send-send-envelope-js">envelope, send/send-envelope.js</a></li><li><a href="#friendly-send-send-friendly-js">friendly, send/send-friendly.js</a></li><li><a href="#link-send-send-link-js">link, send/send-link.js</a></li><li><a href="#transfers-send-send-transfers-js">transfers, send/send-transfers.js</a></li><li><a href="#qr-send-send-qr-js">qr, send/send-qr.js</a></li><li><a href="#vault-send-send-vault-js">vault, send/send-vault.js</a></li><li><a href="#keyring-send-send-keyring-js">keyring, send/send-keyring.js</a></li><li><a href="#words-send-send-words-js">words, send/send-words.js</a></li></ul></nav>
+</div>
+<footer class="sg-footer">
+<p>api.send.sgit.ai · <a class="sg-badge ver" href="/versions/" data-version="v0.1.0" title="released 2026-10-20">v0.1.0</a> · released 2026-10-20 · <a href="/versions/">releases</a> · <a href="/docs/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Send__API">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant/">who publishes this</a></p>
+<p>Everything in the repository is public; nothing in it is secret, and a leak tripwire in the gate checks that on every push. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0; vendored files keep their own licences. What is shipped, proposed or absent is in <a href="/about/reality/">the reality file</a>; if it is not listed there, it does not exist.</p>
+<p class="network">Part of the sgit.ai network: <a href="https://sgit.ai">sgit.ai</a> · <a href="https://send.sgit.ai">send.sgit.ai</a> (the site this API serves) · <a href="https://api.newsroom.sgit.ai">api.newsroom.sgit.ai</a> (the same pattern for the newsroom) · <a href="https://newsroom.sgit.ai">newsroom.sgit.ai</a> · <a href="https://secrets.sgit.ai">secrets.sgit.ai</a> · <a href="https://sgit.ai/network/">the full network</a></p>
+</footer>
+</body>
+</html>

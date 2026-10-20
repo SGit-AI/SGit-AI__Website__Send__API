@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quick start, send a file from a page, api.send.sgit.ai</title>
+<meta name="description" content="Twelve lines to encrypt a file in the browser, upload it as a transfer, and hand over a link and a QR code; and the two lines that open it.">
+<link rel="canonical" href="https://api.send.sgit.ai/start/">
+<link rel="alternate" type="text/markdown" href="/start/index.md">
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="api.send.sgit.ai">
+<meta property="og:title" content="Quick start, send a file from a page, api.send.sgit.ai">
+<meta property="og:description" content="Twelve lines to encrypt a file in the browser, upload it as a transfer, and hand over a link and a QR code; and the two lines that open it.">
+<meta property="og:url" content="https://api.send.sgit.ai/start/">
+<script src="/assets/theme.js"></script>
+<link rel="stylesheet" href="/assets/themes.css">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/nav.js" defer></script>
+
+</head>
+<body data-page="/start/">
+<header class="sg-header">
+<nav class="site" aria-label="Site">
+<div class="row">
+<a class="brand" href="/">api.send<span>.sgit.ai</span></a>
+<a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, git for encrypted vaults">&#8599; part of <b>sgit.ai</b></a>
+<span class="stage-pill">v0.1.0, first release</span>
+<a class="sg-badge ver" href="/versions/" data-version="v0.1.0" title="released 2026-10-20">v0.1.0</a>
+<button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+<div class="nav-items"><div class="ni ni-has"><a class="nl here" href="/start/">Start<span class="caret">&#9662;</span></a><div class="sub"><a class="sl here" href="/start/">Quick start: send a file from a page</a><a class="sl" href="/for-developers/">For developers</a><a class="sl" href="/agents/">For agents</a><a class="sl" href="/for-evaluators/">For evaluators</a></div></div><div class="ni ni-has"><a class="nl" href="/docs/">Reference<span class="caret">&#9662;</span></a><div class="sub"><a class="sl" href="/docs/">The modules</a><a class="sl" href="/docs/contracts/">Contracts: links, envelope, tokens</a><a class="sl" href="/docs/server/">The server it speaks to</a><a class="sl" href="/docs/hosting/">Hosting and pinning</a><a class="sl" href="/docs/versioning/">Versioning: independent releases</a></div></div><div class="ni ni-has"><a class="nl" href="/releases/">Releases<span class="caret">&#9662;</span></a><div class="sub"><a class="sl" href="/releases/">Releases, with manifests</a><a class="sl" href="/versions/">Version history</a><a class="sl" href="/how-to/make-a-release/">How to make a release</a><a class="sl" href="/how-to/run-the-tests/">How to run the tests</a></div></div><div class="ni"><a class="nl" href="/articles/">Articles</a></div><div class="ni ni-has"><a class="nl" href="/about/">About<span class="caret">&#9662;</span></a><div class="sub"><a class="sl" href="/about/">About this repository</a><a class="sl" href="/about/brief/">The brief, in full</a><a class="sl" href="/about/corrections/">Brief corrections</a><a class="sl" href="/about/reality/">Reality: what exists</a><a class="sl" href="/about/team/">The team</a><a class="sl" href="/about/needs/">What needs a human</a><a class="sl" href="/about/participant/">Participant disclosure</a></div></div><div class="ni ni-has ni-theme"><button class="nl" type="button" aria-haspopup="true">Theme<span class="caret">&#9662;</span></button><div class="sub" role="group" aria-label="Theme"><button class="sl" type="button" data-theme-pick="night" aria-pressed="false"><b>Night</b><small>Dark, teal</small></button><button class="sl" type="button" data-theme-pick="day" aria-pressed="false"><b>Day</b><small>Light, teal</small></button><small class="sub-note">Kept in this browser only, as <code>sgit.send.api.ui.theme</code>; nothing else is stored.</small></div></div></div>
+</div>
+</nav>
+</header>
+<nav class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / Quick start, send a file from a page</nav>
+<div class="sg-page with-toc">
+<main id="main">
+<h1 id="quick-start-send-a-file-from-a-page">Quick start: send a file from a page</h1>
+<p>Three things to have in their places before the first line of code. <strong>The access token</strong> authorises you to upload; it travels in a request header and never in a URL. <strong>The key</strong> lets anyone read; it travels in the link's fragment, after <code>#</code>, which a browser never sends to a server. <strong>The file name</strong> travels inside the ciphertext, so the server never sees it. Confuse the first two and nothing throws, which is why this page says it first.</p>
+<h2 id="1-pin-the-release-and-import-it">1. Pin the release and import it</h2>
+<pre><code class="language-html">&lt;script type=&quot;module&quot;&gt;
+  import * as send from &#x27;https://api.send.sgit.ai/v0.1.0/send/send-api.js&#x27;
+&lt;/script&gt;</code></pre>
+<p>The address names the release. A later release is a different directory; this one does not change. <a href="/docs/hosting/">Hosting and pinning</a> says how a site's build can check that.</p>
+<h2 id="2-send">2. Send</h2>
+<pre><code class="language-js">const api = new send.SendTransfers({ endpoint: &#x27;https://send.sgraph.ai&#x27;, accessToken: token })   // the token: a header, never a URL
+const file = input.files[0]
+const r = await api.send({
+  bytes:       new Uint8Array(await file.arrayBuffer()),
+  filename:    file.name,                 // goes inside the envelope, encrypted
+  maxDownloads: 0,                        // 0 is unlimited
+  expiresAt:   Date.now() + 7 * 86400e3,  // milliseconds since the epoch; 0 is never
+  onProgress:  step =&gt; console.log(step)  // wrap, encrypt, create, upload, complete
+})
+const url = send.link.transferLink({ openUrl: &#x27;https://send.sgit.ai/open/&#x27;, transferId: r.transferId, key: r.keyString })
+qrBox.innerHTML = send.qr.toSvg(url, { title: &#x27;scan to open&#x27; })</code></pre>
+<p><code>r.keyString</code> is the 43-character key. Put it in the link, or hand the link without it (<code>key: null</code>) and send the key by a second channel. Never log it: anyone holding it reads the file.</p>
+<h2 id="3-open">3. Open</h2>
+<pre><code class="language-js">const parsed = send.link.parseFragment(location.hash)     // { kind: &#x27;transfer&#x27;, transferId, key } or &#x27;friendly&#x27;, &#x27;vault-key&#x27;, &#x27;read-key&#x27;
+const got = await new send.SendTransfers({ endpoint: &#x27;https://send.sgraph.ai&#x27; })
+  .receive({ transferId: parsed.transferId, keyString: parsed.key })
+saveAs(got.bytes, got.filename)                           // byte for byte what was sent, and the name that never left the browser</code></pre>
+<p>Opening needs no token: <code>info</code> and <code>download</code> are public by design, and the key is the gate.</p>
+<h2 id="a-friendly-token-instead-of-a-key">A friendly token instead of a key</h2>
+<pre><code class="language-js">const token = send.friendly.newFriendlyToken()            // &quot;river-cloud-3847&quot;
+await api.send({ bytes, filename, friendlyToken: token })
+const url = send.link.friendlyLink({ openUrl: &#x27;https://send.sgit.ai/open/&#x27;, token })</code></pre>
+<p>One string that can be read out over the phone, and that a QR code carries in a smaller square. Both the transfer id and the key derive from it, so the server never maps a token to anything. There are 1,024,000,000 possible tokens, guessable offline by anyone who has the ciphertext: a friendly token suits a link that expires; a random key suits one that must not be guessed.</p>
+<h2 id="into-a-vault-instead-of-a-transfer">Into a vault instead of a transfer</h2>
+<pre><code class="language-js">await send.vault.ready()                                                // loads the vendored library from this release
+const sg = send.vault.client({ endpoint: &#x27;https://send.sgraph.ai&#x27;, accessToken: token })
+const { vault, vaultKey, readKey } = await send.vault.createVault(sg, { name: &#x27;Project files&#x27; })
+await send.vault.writeFiles(vault, [{ folder: &#x27;/&#x27;, name: file.name, data: bytes }])
+await send.vault.publish(vault)                                        // compare-and-swap, never push()
+keyring.add({ kind: send.KEYRING_KINDS.VAULT_KEY, label: &#x27;Project files&#x27;, value: vaultKey })   // read and write: stays on this device
+shareUrl = send.link.vaultLink({ openUrl: &#x27;https://send.sgit.ai/open/&#x27;, credential: readKey })  // read only: this one may be shared</code></pre>
+<p>A vault is versioned, browsable, updatable, and clonable with <code>sgit clone &lt;read key&gt;</code>. <a href="/docs/">The modules</a> have the full surface; <a href="/docs/contracts/">the contracts</a> have the byte layouts.</p>
+</main>
+<nav class="sg-toc" aria-label="On this page"><p>On this page</p><ul><li><a href="#1-pin-the-release-and-import-it">1. Pin the release and import it</a></li><li><a href="#2-send">2. Send</a></li><li><a href="#3-open">3. Open</a></li><li><a href="#a-friendly-token-instead-of-a-key">A friendly token instead of a key</a></li><li><a href="#into-a-vault-instead-of-a-transfer">Into a vault instead of a transfer</a></li></ul></nav>
+</div>
+<footer class="sg-footer">
+<p>api.send.sgit.ai · <a class="sg-badge ver" href="/versions/" data-version="v0.1.0" title="released 2026-10-20">v0.1.0</a> · released 2026-10-20 · <a href="/versions/">releases</a> · <a href="/start/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Send__API">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant/">who publishes this</a></p>
+<p>Everything in the repository is public; nothing in it is secret, and a leak tripwire in the gate checks that on every push. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0; vendored files keep their own licences. What is shipped, proposed or absent is in <a href="/about/reality/">the reality file</a>; if it is not listed there, it does not exist.</p>
+<p class="network">Part of the sgit.ai network: <a href="https://sgit.ai">sgit.ai</a> · <a href="https://send.sgit.ai">send.sgit.ai</a> (the site this API serves) · <a href="https://api.newsroom.sgit.ai">api.newsroom.sgit.ai</a> (the same pattern for the newsroom) · <a href="https://newsroom.sgit.ai">newsroom.sgit.ai</a> · <a href="https://secrets.sgit.ai">secrets.sgit.ai</a> · <a href="https://sgit.ai/network/">the full network</a></p>
+</footer>
+</body>
+</html>

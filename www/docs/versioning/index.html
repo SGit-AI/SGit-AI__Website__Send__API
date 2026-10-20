@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Versioning, independent releases, api.send.sgit.ai</title>
+<meta name="description" content="Every minor release is a complete copy of the code with no overlays and no shared files; majors are where the refactoring happens. The rules, the reasons, and how this differs from the IFD that came before it.">
+<link rel="canonical" href="https://api.send.sgit.ai/docs/versioning/">
+<link rel="alternate" type="text/markdown" href="/docs/versioning/index.md">
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="api.send.sgit.ai">
+<meta property="og:title" content="Versioning, independent releases, api.send.sgit.ai">
+<meta property="og:description" content="Every minor release is a complete copy of the code with no overlays and no shared files; majors are where the refactoring happens. The rules, the reasons, and how this differs from the IFD that came before it.">
+<meta property="og:url" content="https://api.send.sgit.ai/docs/versioning/">
+<script src="/assets/theme.js"></script>
+<link rel="stylesheet" href="/assets/themes.css">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/nav.js" defer></script>
+
+</head>
+<body data-page="/docs/versioning/">
+<header class="sg-header">
+<nav class="site" aria-label="Site">
+<div class="row">
+<a class="brand" href="/">api.send<span>.sgit.ai</span></a>
+<a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, git for encrypted vaults">&#8599; part of <b>sgit.ai</b></a>
+<span class="stage-pill">v0.1.0, first release</span>
+<a class="sg-badge ver" href="/versions/" data-version="v0.1.0" title="released 2026-10-20">v0.1.0</a>
+<button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+<div class="nav-items"><div class="ni ni-has"><a class="nl" href="/start/">Start<span class="caret">&#9662;</span></a><div class="sub"><a class="sl" href="/start/">Quick start: send a file from a page</a><a class="sl" href="/for-developers/">For developers</a><a class="sl" href="/agents/">For agents</a><a class="sl" href="/for-evaluators/">For evaluators</a></div></div><div class="ni ni-has"><a class="nl here" href="/docs/">Reference<span class="caret">&#9662;</span></a><div class="sub"><a class="sl" href="/docs/">The modules</a><a class="sl" href="/docs/contracts/">Contracts: links, envelope, tokens</a><a class="sl" href="/docs/server/">The server it speaks to</a><a class="sl" href="/docs/hosting/">Hosting and pinning</a><a class="sl here" href="/docs/versioning/">Versioning: independent releases</a></div></div><div class="ni ni-has"><a class="nl" href="/releases/">Releases<span class="caret">&#9662;</span></a><div class="sub"><a class="sl" href="/releases/">Releases, with manifests</a><a class="sl" href="/versions/">Version history</a><a class="sl" href="/how-to/make-a-release/">How to make a release</a><a class="sl" href="/how-to/run-the-tests/">How to run the tests</a></div></div><div class="ni"><a class="nl" href="/articles/">Articles</a></div><div class="ni ni-has"><a class="nl" href="/about/">About<span class="caret">&#9662;</span></a><div class="sub"><a class="sl" href="/about/">About this repository</a><a class="sl" href="/about/brief/">The brief, in full</a><a class="sl" href="/about/corrections/">Brief corrections</a><a class="sl" href="/about/reality/">Reality: what exists</a><a class="sl" href="/about/team/">The team</a><a class="sl" href="/about/needs/">What needs a human</a><a class="sl" href="/about/participant/">Participant disclosure</a></div></div><div class="ni ni-has ni-theme"><button class="nl" type="button" aria-haspopup="true">Theme<span class="caret">&#9662;</span></button><div class="sub" role="group" aria-label="Theme"><button class="sl" type="button" data-theme-pick="night" aria-pressed="false"><b>Night</b><small>Dark, teal</small></button><button class="sl" type="button" data-theme-pick="day" aria-pressed="false"><b>Day</b><small>Light, teal</small></button><small class="sub-note">Kept in this browser only, as <code>sgit.send.api.ui.theme</code>; nothing else is stored.</small></div></div></div>
+</div>
+</nav>
+</header>
+<nav class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/docs/">The modules</a> / Versioning, independent releases</nav>
+<div class="sg-page with-toc">
+<main id="main">
+<h1 id="versioning-independent-releases">Versioning: independent releases</h1>
+<h2 id="the-rule">The rule</h2>
+<p>Every release under <code>releases/</code> is a complete, independent copy of the code. <code>v0.1.1</code> starts as a copy of <code>v0.1.0</code>, changed where the change is; nothing in it imports from <code>v0.1.0</code>, overrides a method of <code>v0.1.0</code>, or loads a stylesheet of <code>v0.1.0</code>. A page that pins <code>v0.1.0</code> keeps running <code>v0.1.0</code> whatever lands after it.</p>
+<table><thead><tr><th>Kind</th><th>Example</th><th>What happens</th></tr></thead><tbody><tr><td><strong>Minor</strong></td><td>v0.1.1, v0.1.2</td><td>Copy the current release whole, make the change, add the test that fails without it, cut the manifest. Quality control on each</td></tr><tr><td><strong>Major</strong></td><td>v0.2.0</td><td>Consolidate: refactor what the minors proved into a clean copy, retire what did not survive, keep the contracts</td></tr><tr><td><strong>Release</strong></td><td>v1.0.0</td><td>The previous major with no code change: version and documentation only</td></tr></tbody></table>
+<h2 id="why-no-overlays-this-time">Why no overlays this time</h2>
+<p>The <a href="https://github.com/the-cyber-boardroom/SGraph-AI__App__Send/tree/dev/library/guides/development/ifd">IFD methodology</a> that send.sgraph.ai is built with shares code between minor versions: a minor holds only its surgical overrides and links back to the base, so <code>v0.3.2</code> is <code>v0.3.0</code> plus two patch files loaded after it. That was the right trade when every line was written by hand and a full copy per version was a cost. Two things changed. The code here is small and its scope is deliberately narrow, so a copy is a few hundred kilobytes. And the agents that now write most of it work better with one tree they can read whole than with a base and three layers of overrides to compose in their heads; the override chains in send.sgraph.ai's <code>index.html</code> (load order comments eight items long) are the evidence. So the overlay goes, and what stays from IFD is everything else: minors for active development, majors for consolidation, tests co-located with what they test, real data from the first version, zero external dependencies.</p>
+<h2 id="what-it-costs-and-what-it-buys">What it costs, and what it buys</h2>
+<ul><li><strong>Costs:</strong> disk, trivially; and a fix that applies to several live releases has to be made in each, as a new minor of each, which is the point: a reader pinned to an old release gets nothing they did not ask for.</li><li><strong>Buys:</strong> a release that can be read, reviewed, hashed and reasoned about on its own; a manifest that is the whole truth; a consuming site that cannot be changed under its readers; and a fractal shape, where each component is independent by itself and can be lifted out, which is where this is going.</li></ul>
+<h2 id="the-mechanics">The mechanics</h2>
+<ol><li><code>cp -r releases/v0.1.0 releases/v0.1.1</code>, then make the change in <code>v0.1.1</code> only.</li><li><code>VERSION = 'v0.1.1'</code> in <code>send/send-api.js</code>; the gate checks it matches the directory.</li><li>A test in <code>tests/</code> that fails without the change; <code>node --test 'tests/*.test.mjs'</code> green.</li><li><code>python3 tools/release.py cut v0.1.1</code> writes the manifest; <code>tools/version.json</code> says <code>release: v0.1.1</code>.</li><li>A line in <code>website/data/versions.json</code> that says what changed and why, in words a reader can act on.</li><li><code>python3 tools/build.py &amp;&amp; python3 tools/check.py</code>, commit, push. <code>main</code> deploys, tags, and checks the live host.</li></ol>
+<p><a href="/how-to/make-a-release/">How to make a release</a> is the same list as a checklist. The article that argues this out is <a href="/articles/independent-releases.html">Independent releases</a>.</p>
+</main>
+<nav class="sg-toc" aria-label="On this page"><p>On this page</p><ul><li><a href="#the-rule">The rule</a></li><li><a href="#why-no-overlays-this-time">Why no overlays this time</a></li><li><a href="#what-it-costs-and-what-it-buys">What it costs, and what it buys</a></li><li><a href="#the-mechanics">The mechanics</a></li></ul></nav>
+</div>
+<footer class="sg-footer">
+<p>api.send.sgit.ai · <a class="sg-badge ver" href="/versions/" data-version="v0.1.0" title="released 2026-10-20">v0.1.0</a> · released 2026-10-20 · <a href="/versions/">releases</a> · <a href="/docs/versioning/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Send__API">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant/">who publishes this</a></p>
+<p>Everything in the repository is public; nothing in it is secret, and a leak tripwire in the gate checks that on every push. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0; vendored files keep their own licences. What is shipped, proposed or absent is in <a href="/about/reality/">the reality file</a>; if it is not listed there, it does not exist.</p>
+<p class="network">Part of the sgit.ai network: <a href="https://sgit.ai">sgit.ai</a> · <a href="https://send.sgit.ai">send.sgit.ai</a> (the site this API serves) · <a href="https://api.newsroom.sgit.ai">api.newsroom.sgit.ai</a> (the same pattern for the newsroom) · <a href="https://newsroom.sgit.ai">newsroom.sgit.ai</a> · <a href="https://secrets.sgit.ai">secrets.sgit.ai</a> · <a href="https://sgit.ai/network/">the full network</a></p>
+</footer>
+</body>
+</html>

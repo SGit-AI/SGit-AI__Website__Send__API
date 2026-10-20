@@ -1,0 +1,63 @@
+/* themes.css: every colour on this site, twice. The family palette (Night, teal on navy; Day, the same teal on
+   white), as sgit.ai, secrets.sgit.ai and the newsroom carry it. No other file writes a colour: everything uses
+   the tokens below, so a theme is a block here and nothing more. assets/theme.js sets html[data-theme] before the
+   first paint. Each block defines every token the default defines. */
+
+:root,
+html[data-theme="night"] {
+    color-scheme:                 dark;
+    --sg-bg:                      #1A1A2E;
+    --sg-bg-secondary:            #16213E;
+    --sg-bg-surface:              rgba(44, 62, 107, 0.35);
+    --sg-bg-surface-strong:       rgba(44, 62, 107, 0.65);
+    --sg-bg-header:               rgba(26, 26, 46, 0.92);
+    --sg-border:                  #2C3E6B;
+    --sg-text:                    #E0E0E0;
+    --sg-text-heading:            #FFFFFF;
+    --sg-text-muted:              #8892A0;
+    --sg-accent:                  #4ECDC4;
+    --sg-accent-hover:            #3DB8B0;
+    --sg-accent-subtle:           rgba(78, 205, 196, 0.12);
+    --sg-on-accent:               #1A1A2E;
+    --sg-selected:                rgba(78, 205, 196, 0.22);
+    --sg-danger:                  #E94560;
+    --sg-danger-subtle:           rgba(233, 69, 96, 0.14);
+    --sg-status-shipped:          #4ECDC4;
+    --sg-status-proposed:         #E0B84E;
+    --sg-status-proposed-subtle:  rgba(224, 184, 78, 0.12);
+    --sg-status-absent:           #8892A0;
+    --sg-on-status:               #1A1A2E;
+    --sg-shadow:                  0 8px 24px rgba(0, 0, 0, 0.35);
+    --sg-code-bg:                 rgba(0, 0, 0, 0.35);
+    --sg-qr-dark:                 #FFFFFF;
+    --sg-qr-light:                #1A1A2E;
+}
+
+html[data-theme="day"] {
+    color-scheme:                 light;
+    --sg-bg:                      #FFFFFF;
+    --sg-bg-secondary:            #F3F5F9;
+    --sg-bg-surface:              rgba(44, 62, 107, 0.06);
+    --sg-bg-surface-strong:       rgba(44, 62, 107, 0.12);
+    --sg-bg-header:               rgba(255, 255, 255, 0.92);
+    --sg-border:                  #D6DCE8;
+    --sg-text:                    #23283A;
+    --sg-text-heading:            #0F1424;
+    --sg-text-muted:              #5C6577;
+    --sg-accent:                  #0F8E86;
+    --sg-accent-hover:            #0B7570;
+    --sg-accent-subtle:           rgba(15, 142, 134, 0.10);
+    --sg-on-accent:               #FFFFFF;
+    --sg-selected:                rgba(15, 142, 134, 0.18);
+    --sg-danger:                  #C3263F;
+    --sg-danger-subtle:           rgba(195, 38, 63, 0.10);
+    --sg-status-shipped:          #0F8E86;
+    --sg-status-proposed:         #8A6A0E;
+    --sg-status-proposed-subtle:  rgba(138, 106, 14, 0.12);
+    --sg-status-absent:           #5C6577;
+    --sg-on-status:               #FFFFFF;
+    --sg-shadow:                  0 8px 24px rgba(15, 20, 36, 0.12);
+    --sg-code-bg:                 rgba(44, 62, 107, 0.08);
+    --sg-qr-dark:                 #0F1424;
+    --sg-qr-light:                #FFFFFF;
+}

@@ -1,0 +1,55 @@
+# Every commit: the gate (the build is what is committed, every release matches its manifest, links, twins, origins,
+# the leak tripwire, prose, the version), then the release's own tests against the in-memory server.
+name: ci
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: The gate, exactly as it runs locally
+        run: python3 tools/check.py
+      - name: The version is above the default branch's (every change that lands there is a version)
+        if: github.ref != 'refs/heads/main'
+        run: |
+          set -euo pipefail
+          git fetch --quiet origin main || exit 0
+          python3 - <<'PY'
+          import json, subprocess, sys
+          t = lambda v: tuple(int(x) for x in v[1:].split("."))
+          here = json.load(open("tools/version.json"))["version"]
+          try:
+              base = json.loads(subprocess.check_output(["git", "show", "origin/main:tools/version.json"])).get("version", "v0.0.0")
+          except subprocess.CalledProcessError:
+              base = "v0.0.0"
+          if t(here) <= t(base):
+              sys.exit(f"::error::tools/version.json says {here}; main is at {base}: bump the version")
+          print(f"{here} is above main's {base}")
+          PY
+      - name: The release's tests, in Node, against the in-memory server
+        run: |
+          set -euo pipefail
+          for r in releases/v*/; do
+            echo "== $r"
+            (cd "$r" && node --test 'tests/*.test.mjs')
+          done
+      - name: The browser smoke test (Chromium)
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.56.1
+          npx playwright install --with-deps chromium
+          node tests/test_browser.mjs

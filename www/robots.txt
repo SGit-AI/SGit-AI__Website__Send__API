@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://api.send.sgit.ai/sitemap.xml

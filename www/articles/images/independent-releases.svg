@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" font-family="system-ui, sans-serif" font-size="14">
+<rect width="900" height="360" fill="#1A1A2E"/>
+<text x="30" y="36" fill="#FFFFFF" font-size="18" font-weight="700">IFD overlays (send.sgraph.ai)</text>
+<rect x="30" y="60" width="380" height="60" rx="6" fill="#16213E" stroke="#4ECDC4"/><text x="45" y="85" fill="#FFFFFF">v0.3.0  base: every file, every method</text><text x="45" y="105" fill="#8892A0">loaded first</text>
+<rect x="30" y="140" width="380" height="44" rx="6" fill="#16213E" stroke="#E0B84E"/><text x="45" y="167" fill="#FFFFFF">v0.3.1  overlay: 1 file, overrides 2 methods</text>
+<rect x="30" y="204" width="380" height="44" rx="6" fill="#16213E" stroke="#E0B84E"/><text x="45" y="231" fill="#FFFFFF">v0.3.2  overlay: 8 files, load order in a comment</text>
+<path d="M220 120 v20 M220 184 v20" stroke="#8892A0" stroke-width="2"/>
+<text x="30" y="290" fill="#8892A0">the truth is the base + each overlay + the order</text>
+<text x="490" y="36" fill="#FFFFFF" font-size="18" font-weight="700">Independent releases (api.send.sgit.ai)</text>
+<rect x="490" y="60" width="180" height="200" rx="6" fill="#16213E" stroke="#4ECDC4"/><text x="505" y="85" fill="#FFFFFF" font-weight="700">v0.1.0</text><text x="505" y="110" fill="#E0E0E0">send/  10 modules</text><text x="505" y="130" fill="#E0E0E0">vendor/  2 libraries</text><text x="505" y="150" fill="#E0E0E0">tests/  43 tests + server</text><text x="505" y="170" fill="#E0E0E0">manifest.json  34 hashes</text><text x="505" y="240" fill="#8892A0">never edited</text>
+<rect x="690" y="60" width="180" height="200" rx="6" fill="#16213E" stroke="#4ECDC4"/><text x="705" y="85" fill="#FFFFFF" font-weight="700">v0.1.1</text><text x="705" y="110" fill="#E0E0E0">send/  10 modules</text><text x="705" y="130" fill="#E0E0E0">vendor/  2 libraries</text><text x="705" y="150" fill="#E0E0E0">tests/  44 tests + server</text><text x="705" y="170" fill="#E0E0E0">manifest.json  34 hashes</text><text x="705" y="240" fill="#8892A0">a whole copy, changed where the change is</text>
+<text x="490" y="290" fill="#8892A0">nothing between them; a page pins one by address</text>
+<text x="30" y="340" fill="#8892A0" font-size="12">api.send.sgit.ai v0.1.0, 20 October 2026, CC BY 4.0</text>
+</svg>

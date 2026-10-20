@@ -1,0 +1,13 @@
+{
+  "schema": "review-intent/v1",
+  "brief": "briefs/2026-10-20__0{1,2,3,4}__*__transcript.txt",
+  "accepted": "2026-10-20",
+  "sections": [
+    { "id": "memo-01.move",     "memo": "01", "intent": "send.sgraph.ai's job, on send.sgit.ai, with vault keys stored and files in vaults", "answered_by": ["releases/v0.1.0/send/send-vault.js", "releases/v0.1.0/send/send-keyring.js"], "status": "shipped" },
+    { "id": "memo-01.qr",       "memo": "01", "intent": "QR codes as the first way to hand a link over", "answered_by": ["releases/v0.1.0/send/send-qr.js"], "status": "shipped" },
+    { "id": "memo-02.split",    "memo": "02", "intent": "api.send.sgit.ai holds the code; the site is the usage, examples and commercial model", "answered_by": ["releases/", "website/", "tools/release.py"], "status": "shipped" },
+    { "id": "memo-03.releases", "memo": "03", "intent": "every minor release a complete independent copy; quality control per minor; refactor at the major", "answered_by": ["tools/release.py", "website/pages/docs/versioning/index.md", "website/pages/articles/independent-releases.md"], "status": "shipped" },
+    { "id": "memo-03.article",  "memo": "03", "intent": "an article on the api.<site> pattern", "answered_by": ["website/pages/articles/independent-releases.md"], "status": "shipped" },
+    { "id": "memo-04.articles", "memo": "04", "intent": "a centralised page on every site carrying its own /articles/", "answered_by": ["https://send.sgit.ai/articles/every-site-its-own-articles/"], "status": "shipped-elsewhere" }
+  ]
+}

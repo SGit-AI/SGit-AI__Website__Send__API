@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For developers, api.send.sgit.ai</title>
+<meta name="description" content="How to take a release into a site, what to pin, what the gate should check, what runs where, and how to run the tests and the server in memory.">
+<link rel="canonical" href="https://api.send.sgit.ai/for-developers/">
+<link rel="alternate" type="text/markdown" href="/for-developers/index.md">
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="api.send.sgit.ai">
+<meta property="og:title" content="For developers, api.send.sgit.ai">
+<meta property="og:description" content="How to take a release into a site, what to pin, what the gate should check, what runs where, and how to run the tests and the server in memory.">
+<meta property="og:url" content="https://api.send.sgit.ai/for-developers/">
+<script src="/assets/theme.js"></script>
+<link rel="stylesheet" href="/assets/themes.css">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/nav.js" defer></script>
+
+</head>
+<body data-page="/for-developers/">
+<header class="sg-header">
+<nav class="site" aria-label="Site">
+<div class="row">
+<a class="brand" href="/">api.send<span>.sgit.ai</span></a>
+<a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, git for encrypted vaults">&#8599; part of <b>sgit.ai</b></a>
+<span class="stage-pill">v0.1.0, first release</span>
+<a class="sg-badge ver" href="/versions/" data-version="v0.1.0" title="released 2026-10-20">v0.1.0</a>
+<button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+<div class="nav-items"><div class="ni ni-has"><a class="nl" href="/start/">Start<span class="caret">&#9662;</span></a><div class="sub"><a class="sl" href="/start/">Quick start: send a file from a page</a><a class="sl here" href="/for-developers/">For developers</a><a class="sl" href="/agents/">For agents</a><a class="sl" href="/for-evaluators/">For evaluators</a></div></div><div class="ni ni-has"><a class="nl" href="/docs/">Reference<span class="caret">&#9662;</span></a><div class="sub"><a class="sl" href="/docs/">The modules</a><a class="sl" href="/docs/contracts/">Contracts: links, envelope, tokens</a><a class="sl" href="/docs/server/">The server it speaks to</a><a class="sl" href="/docs/hosting/">Hosting and pinning</a><a class="sl" href="/docs/versioning/">Versioning: independent releases</a></div></div><div class="ni ni-has"><a class="nl" href="/releases/">Releases<span class="caret">&#9662;</span></a><div class="sub"><a class="sl" href="/releases/">Releases, with manifests</a><a class="sl" href="/versions/">Version history</a><a class="sl" href="/how-to/make-a-release/">How to make a release</a><a class="sl" href="/how-to/run-the-tests/">How to run the tests</a></div></div><div class="ni"><a class="nl" href="/articles/">Articles</a></div><div class="ni ni-has"><a class="nl" href="/about/">About<span class="caret">&#9662;</span></a><div class="sub"><a class="sl" href="/about/">About this repository</a><a class="sl" href="/about/brief/">The brief, in full</a><a class="sl" href="/about/corrections/">Brief corrections</a><a class="sl" href="/about/reality/">Reality: what exists</a><a class="sl" href="/about/team/">The team</a><a class="sl" href="/about/needs/">What needs a human</a><a class="sl" href="/about/participant/">Participant disclosure</a></div></div><div class="ni ni-has ni-theme"><button class="nl" type="button" aria-haspopup="true">Theme<span class="caret">&#9662;</span></button><div class="sub" role="group" aria-label="Theme"><button class="sl" type="button" data-theme-pick="night" aria-pressed="false"><b>Night</b><small>Dark, teal</small></button><button class="sl" type="button" data-theme-pick="day" aria-pressed="false"><b>Day</b><small>Light, teal</small></button><small class="sub-note">Kept in this browser only, as <code>sgit.send.api.ui.theme</code>; nothing else is stored.</small></div></div></div>
+</div>
+</nav>
+</header>
+<nav class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / For developers</nav>
+<div class="sg-page with-toc">
+<main id="main">
+<h1 id="for-developers">For developers</h1>
+<h2 id="take-a-release">Take a release</h2>
+<ol><li>Name the release in one file of your site, for example <code>build/api.json</code>: <code>{ "host": "https://api.send.sgit.ai", "release": "v0.1.0" }</code>.</li><li>Copy <code>https://api.send.sgit.ai/v0.1.0/manifest.json</code> next to it, so your build knows the hash of every file it may load.</li><li>Load the code by its full address, <code>https://api.send.sgit.ai/v0.1.0/send/send-api.js</code>, in a <code>&lt;script type="module"&gt;</code> or an import map.</li><li>Add a check to your gate: every reference to this host is pinned to the release you named and is a path in the manifest. send.sgit.ai's gate does exactly this.</li></ol>
+<p>A script loaded from another host still runs on your page's origin, so the keyring, the clone branch and everything the modules store stay in your site's storage. This host has no way to receive anything.</p>
+<h2 id="what-runs-where">What runs where</h2>
+<table><thead><tr><th>Module</th><th>Browser</th><th>Node 20+</th><th>Needs</th></tr></thead><tbody><tr><td>crypto, envelope, friendly, words, link, keyring</td><td>yes</td><td>yes</td><td><code>globalThis.crypto</code> (a secure context in a browser)</td></tr><tr><td>transfers</td><td>yes</td><td>yes</td><td><code>fetch</code>; an access token for writes</td></tr><tr><td>qr</td><td>yes</td><td>yes</td><td>nothing</td></tr><tr><td>vault</td><td>yes</td><td>yes, after loading the twelve library files into the realm (<code>tests/_lib.mjs</code> shows how)</td><td>an access token for creating and writing</td></tr></tbody></table>
+<h2 id="run-the-tests">Run the tests</h2>
+<pre><code>cd releases/v0.1.0
+node --test &#x27;tests/*.test.mjs&#x27;</code></pre>
+<p>43 tests, about four seconds, no network: <code>tests/server.mjs</code> starts the API in memory on a random port and the client code runs unchanged against it. <a href="/how-to/run-the-tests/">How to run the tests</a> has the rest, including the browser run.</p>
+<h2 id="run-the-server-for-local-development">Run the server for local development</h2>
+<pre><code>node releases/v0.1.0/tests/server.mjs 8787 local-dev-token</code></pre>
+<p>Point a page at <code>http://localhost:8787</code> with the access token <code>local-dev-token</code> and everything works without an account: transfers, vaults, download caps, expiry, revocation. It forgets everything when it stops. <a href="/docs/server/">The server it speaks to</a> lists the routes.</p>
+<h2 id="make-a-change">Make a change</h2>
+<p>A change to a served file is a new release: copy <code>releases/v0.1.0/</code> to <code>releases/v0.1.1/</code>, make the change there with a test that fails without it, cut the manifest, bump <code>tools/version.json</code>, and let the gate and the pipeline do the rest. <a href="/how-to/make-a-release/">How to make a release</a> is the checklist; <a href="/docs/versioning/">independent releases</a> is why it works this way.</p>
+</main>
+<nav class="sg-toc" aria-label="On this page"><p>On this page</p><ul><li><a href="#take-a-release">Take a release</a></li><li><a href="#what-runs-where">What runs where</a></li><li><a href="#run-the-tests">Run the tests</a></li><li><a href="#run-the-server-for-local-development">Run the server for local development</a></li><li><a href="#make-a-change">Make a change</a></li></ul></nav>
+</div>
+<footer class="sg-footer">
+<p>api.send.sgit.ai · <a class="sg-badge ver" href="/versions/" data-version="v0.1.0" title="released 2026-10-20">v0.1.0</a> · released 2026-10-20 · <a href="/versions/">releases</a> · <a href="/for-developers/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Send__API">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant/">who publishes this</a></p>
+<p>Everything in the repository is public; nothing in it is secret, and a leak tripwire in the gate checks that on every push. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0; vendored files keep their own licences. What is shipped, proposed or absent is in <a href="/about/reality/">the reality file</a>; if it is not listed there, it does not exist.</p>
+<p class="network">Part of the sgit.ai network: <a href="https://sgit.ai">sgit.ai</a> · <a href="https://send.sgit.ai">send.sgit.ai</a> (the site this API serves) · <a href="https://api.newsroom.sgit.ai">api.newsroom.sgit.ai</a> (the same pattern for the newsroom) · <a href="https://newsroom.sgit.ai">newsroom.sgit.ai</a> · <a href="https://secrets.sgit.ai">secrets.sgit.ai</a> · <a href="https://sgit.ai/network/">the full network</a></p>
+</footer>
+</body>
+</html>

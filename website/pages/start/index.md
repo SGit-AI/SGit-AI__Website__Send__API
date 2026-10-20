@@ -11,7 +11,7 @@ Three things to have in their places before the first line of code. **The access
 
 ```html
 <script type="module">
-  import * as send from 'https://api.send.sgit.ai/v0.1.0/send/send-api.js'
+  import * as send from 'https://api.send.sgit.ai/v0.1.1/send/send-api.js'
 </script>
 ```
 

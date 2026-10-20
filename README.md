@@ -4,9 +4,9 @@ The client-side API behind [send.sgit.ai](https://send.sgit.ai): the modules a b
 name inside the ciphertext, upload it as a transfer or commit it into a vault, draw the link as a QR code, and keep the
 keys on the device. Published at **api.send.sgit.ai** (this repository's GitHub Pages site) as versioned releases,
 `https://api.send.sgit.ai/<release>/<path>`, that send.sgit.ai and anyone else pin by address. No server, nothing to
-deploy but files. Current version v0.1.0.
+deploy but files. Current version v0.1.1 (release v0.1.1, a whole copy of v0.1.0 with one fix).
 
-- **The release:** [`releases/v0.1.0/`](releases/v0.1.0/README.md), a complete, independent copy of the code: `send/`
+- **The release:** [`releases/v0.1.1/`](releases/v0.1.1/README.md), a complete, independent copy of the code: `send/`
   (ten ES modules), `vendor/` (the vault library v0.2.3 and qrcode-generator 2.0.4, unchanged and hashed), `tests/`
   (43 tests and the SG/Send API in memory) and `manifest.json`. Never edited after it is on `dev`; a change is the
   next directory.
@@ -23,9 +23,9 @@ deploy but files. Current version v0.1.0.
 ```
 python3 tools/build.py                      # write www/ from website/
 python3 tools/check.py                      # the gate: what CI runs
-(cd releases/v0.1.0 && node --test 'tests/*.test.mjs')   # the release's tests, ~4 s, no network
+(cd releases/v0.1.1 && node --test 'tests/*.test.mjs')   # the release's tests, ~4 s, no network
 node tests/test_browser.mjs                 # the same modules on a page, in Chromium (Playwright)
-node releases/v0.1.0/tests/server.mjs 8787 local-dev-token   # the API in memory, for a page on a laptop
+node releases/v0.1.1/tests/server.mjs 8787 local-dev-token   # the API in memory, for a page on a laptop
 python3 tools/release.py cut v0.1.1         # the manifest of a new release
 ```
 

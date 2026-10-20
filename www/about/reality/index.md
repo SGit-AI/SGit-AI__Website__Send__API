@@ -2,20 +2,20 @@
 
 > The code-verified list of what this repository implements, generated from website/data/features.json on every build. If it is not listed here, it does not exist.
 
-*Source: <https://api.send.sgit.ai/about/reality/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/about/reality/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
 # Reality: what exists
 
-Generated from `website/data/features.json` on every build; audited 2026-10-20, v0.1.0, by reading releases/v0.1.0 and running its tests against the code. **If it is not listed here, it does not exist.** Status words: *shipped* (code, tests, served), *proposed* (described in a brief, no code), *absent* (asked about, not built, not planned yet).
+Generated from `website/data/features.json` on every build; audited 2026-10-20, v0.1.1, by reading releases/v0.1.1 and running its tests against the code. **If it is not listed here, it does not exist.** Status words: *shipped* (code, tests, served), *proposed* (described in a brief, no code), *absent* (asked about, not built, not planned yet).
 
 ## The release
 
 | Feature | Status | Since | Evidence |
 |---|---|---|---|
-| A release directory that is a complete, independent copy: nothing in it loads from another version or another host | <span class="sg-status sg-status-shipped">shipped</span> | v0.1.0 | `releases/v0.1.0/`; `tools/release.py check` fails on a reference outside the directory only by hash, see the note in corrections |
-| A manifest with the SHA-256 of every file, recomputed by the gate | <span class="sg-status sg-status-shipped">shipped</span> | v0.1.0 | `releases/v0.1.0/manifest.json`, `tools/release.py check` |
+| A release directory that is a complete, independent copy: nothing in it loads from another version or another host | <span class="sg-status sg-status-shipped">shipped</span> | v0.1.0 | `releases/v0.1.1/`; `tools/release.py check` fails on a reference outside the directory only by hash, see the note in corrections |
+| A manifest with the SHA-256 of every file, recomputed by the gate | <span class="sg-status sg-status-shipped">shipped</span> | v0.1.0 | `releases/v0.1.1/manifest.json`, `tools/release.py check` |
 | The live host checked file by file after a deploy | <span class="sg-status sg-status-shipped">shipped</span> | v0.1.0 | `tools/live_check.py`, the verify-live job; not yet run, the host has no DNS yet (see needs) |
 | Presigned or multipart uploads for payloads over 4 MB | <span class="sg-status sg-status-proposed">proposed</span> |  | `send-transfers.js` refuses with ETOOLARGE; the server route exists on send.sgraph.ai |
 

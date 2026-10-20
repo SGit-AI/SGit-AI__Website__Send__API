@@ -2,7 +2,7 @@
 
 > The client-side API behind send.sgit.ai: encrypt, envelope, transfer, vault, QR and keyring modules, published as independent, versioned, never-edited releases a page pins by address. No server, nothing to deploy but files.
 
-Site version: v0.1.0 (2026-10-20). This host publishes the client-side code send.sgit.ai runs, as releases at /vX.Y.Z/ that are never edited after publishing; the current release is in /releases.json. Source: https://github.com/SGit-AI/SGit-AI__Website__Send__API
+Site version: v0.1.1 (2026-10-20). This host publishes the client-side code send.sgit.ai runs, as releases at /vX.Y.Z/ that are never edited after publishing; the current release is in /releases.json. Source: https://github.com/SGit-AI/SGit-AI__Website__Send__API
 
 Every HTML page has a markdown twin at the same path with the extension swapped; links inside the markdown point at pages. If your tooling cannot follow links, fetch /llms-full.txt: every page in one request.
 
@@ -33,8 +33,8 @@ Every HTML page has a markdown twin at the same path with the extension swapped;
 - [Releases](/releases/index.md): Every release of the reader code, newest first, with its date, size and manifest. A release is never edited after it is published.
 - [Quick start, send a file from a page](/start/index.md): Twelve lines to encrypt a file in the browser, upload it as a transfer, and hand over a link and a QR code; and the two lines that open it.
 - [Version history](/versions/index.md): One line per version, newest first, saying what changed and why. Every change that lands on dev is a version; the deploy tags it.
-- [The current release's manifest](/v0.1.0/manifest.json): every file with its size and SHA-256
-- [The release's README](/v0.1.0/README.md): the modules and what each does
+- [The current release's manifest](/v0.1.1/manifest.json): every file with its size and SHA-256
+- [The release's README](/v0.1.1/README.md): the modules and what each does
 - [releases.json](/releases.json): every release, newest first
 
 
@@ -42,17 +42,17 @@ Every HTML page has a markdown twin at the same path with the extension swapped;
 
 > Encrypt, envelope, transfer, vault, QR and keyring modules, published as independent, versioned, never-edited releases a page pins by address. No server, nothing to deploy but files.
 
-*Source: <https://api.send.sgit.ai/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
 # The API behind send.sgit.ai, as files a page pins
 
-<p class="sg-lead">Everything <a href="https://send.sgit.ai">send.sgit.ai</a> does in the browser lives here: encrypting a file, keeping its name inside the ciphertext, uploading it as one transfer or committing it into a vault, turning the link into a QR code, and remembering the keys on the device. It is published at a versioned address, <code>/v0.1.0/</code>, that is never edited once it is on the default branch, with a manifest of the SHA-256 of every file. Any page, on any site, can import it.</p>
+<p class="sg-lead">Everything <a href="https://send.sgit.ai">send.sgit.ai</a> does in the browser lives here: encrypting a file, keeping its name inside the ciphertext, uploading it as one transfer or committing it into a vault, turning the link into a QR code, and remembering the keys on the device. It is published at a versioned address, <code>/v0.1.1/</code>, that is never edited once it is on the default branch, with a manifest of the SHA-256 of every file. Any page, on any site, can import it.</p>
 
 ```html
 <script type="module">
-  import * as send from 'https://api.send.sgit.ai/v0.1.0/send/send-api.js'
+  import * as send from 'https://api.send.sgit.ai/v0.1.1/send/send-api.js'
   const api = new send.SendTransfers({ endpoint: 'https://send.sgraph.ai', accessToken })
   const r   = await api.send({ bytes, filename: 'report.pdf' })
   const url = send.link.transferLink({ openUrl: 'https://send.sgit.ai/open/', transferId: r.transferId, key: r.keyString })
@@ -72,7 +72,7 @@ Every HTML page has a markdown twin at the same path with the extension swapped;
 | | |
 |---|---|
 | **An API with no server** | "API" here means client-side: the modules, formats and contracts a browser runs. This host serves files over GitHub Pages and receives nothing. The server the modules talk to is the SG/Send API at `send.sgraph.ai`, or any host that serves the same routes, including [the one in memory](/docs/server/) that the tests use |
-| **One release, one directory** | `/v0.1.0/` holds `send/` (the modules), `vendor/` (the vault library and the QR encoder, unchanged and hashed), `tests/` (co-located, runnable with Node and in a browser) and `manifest.json`. Nothing in it loads from another release or another host |
+| **One release, one directory** | `/v0.1.1/` holds `send/` (the modules), `vendor/` (the vault library and the QR encoder, unchanged and hashed), `tests/` (co-located, runnable with Node and in a browser) and `manifest.json`. Nothing in it loads from another release or another host |
 | **Pinned by address** | A consuming site names one release in a file, copies its manifest, and loads the code by its full address. Its own gate can then refuse a reference that is not pinned or not in the manifest |
 | **Compatible with send.sgraph.ai** | The ciphertext layout, the SGMETA envelope, the friendly-token derivations and the link fragments are the ones send.sgraph.ai has shipped since its v0.2.x, so a transfer made here opens there and the other way round. Proved against the published contracts and the in-memory server; a round trip against the live host is still to run, and [the reality file](/about/reality/) says so |
 | **Tests that run against real things** | 43 tests in Node against an in-memory implementation of the API, including real vaults made with the vendored library, two clients racing a publish, and the lazy-folder trap. No mocks |
@@ -88,7 +88,7 @@ Every HTML page has a markdown twin at the same path with the extension swapped;
 
 > What api.send.sgit.ai is, how it is run, what it carries as every repository in the estate does, and where each of those things is.
 
-*Source: <https://api.send.sgit.ai/about/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/about/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -105,7 +105,7 @@ It follows [what every sgit repository carries](https://sgit.ai/docs/guidance/re
 | The corrections file | [/about/corrections/](/about/corrections/), `BRIEF-CORRECTIONS.md` |
 | One version, going up on every push | `tools/version.json`, shown in every header, [the history](/versions/) |
 | The gate | `tools/check.py`, [what it checks](/how-to/make-a-release/) |
-| Tests against real things | `releases/v0.1.0/tests/`, [how to run them](/how-to/run-the-tests/) |
+| Tests against real things | `releases/v0.1.1/tests/`, [how to run them](/how-to/run-the-tests/) |
 | The review folder | `review/intent/`: the brief as sections; the derived graph is proposed |
 | Roles and a board, as files | [/about/team/](/about/team/), `team/` |
 | A credentials tier that is never committed | nothing in this repository needs a credential; the tripwire scans every tracked file anyway |
@@ -121,7 +121,7 @@ What only a person can do next is on [/about/needs/](/about/needs/).
 
 > The four voice memos of 20 October 2026 that started this repository and send.sgit.ai, published as spoken, with the status of each and what was done from it.
 
-*Source: <https://api.send.sgit.ai/about/brief/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/about/brief/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -129,7 +129,7 @@ What only a person can do next is on [/about/needs/](/about/needs/).
 
 A repository here starts from a brief published in full, written by a person or by an agent from the person's words, and never edited afterwards to look right; corrections go in [the corrections file](/about/corrections/). These are the four voice memos Dinis Cruz recorded on 20 October 2026 and handed to the agent in one session, as transcribed. The reading of them that the agent worked from is at the end; where that reading was wrong, the corrections file says so.
 
-**Status:** accepted, 20 October 2026, by being handed to the session with "let's build this". **What was built from them:** this repository and [send.sgit.ai](https://send.sgit.ai), both at v0.1.0; [the reality file](/about/reality/) says which parts exist.
+**Status:** accepted, 20 October 2026, by being handed to the session with "let's build this". **What was built from them:** this repository and [send.sgit.ai](https://send.sgit.ai), both at v0.1.1; [the reality file](/about/reality/) says which parts exist.
 
 ## Memo 01: Refactoring SG/Send to sgit.ai {#memo-01}
 
@@ -174,7 +174,7 @@ A repository here starts from a brief published in full, written by a person or 
 
 > Where the brief was wrong, where the agent's reading of it was wrong, and what was done instead; the brief itself is never edited.
 
-*Source: <https://api.send.sgit.ai/about/corrections/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/about/corrections/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -184,7 +184,7 @@ The brief ([published in full](/about/brief/)) is never edited to look right aft
 
 | Date | Where | What was found | What was done |
 |---|---|---|---|
-| 2026-10-20 | Memo 1, "replicates the functionality that we had on send.sgraph.ai" | send.sgraph.ai at v0.34 has far more than a first release can carry: folders, text and secret transfers, presigned multipart uploads for large files, seventeen locales, a share zip of a vault, a gallery, an admin console. | v0.1.0 carries the core: file transfers under 4 MB, friendly tokens, QR codes, vaults with the keyring. The rest is listed as proposed in [the reality file](/about/reality/) rather than described as present. |
+| 2026-10-20 | Memo 1, "replicates the functionality that we had on send.sgraph.ai" | send.sgraph.ai at v0.34 has far more than a first release can carry: folders, text and secret transfers, presigned multipart uploads for large files, seventeen locales, a share zip of a vault, a gallery, an admin console. | v0.1.1 carries the core: file transfers under 4 MB, friendly tokens, QR codes, vaults with the keyring. The rest is listed as proposed in [the reality file](/about/reality/) rather than described as present. |
 | 2026-10-20 | Memo 3, "every minor release is 100% independent" | Taken literally, this includes the tests and the in-memory server, which doubles every release's size with code a page never loads. | They are included anyway: a release that can be tested on its own is the point, and 270 KB is not a cost. The manifest lists them; a consuming site loads only `send/`. |
 | 2026-10-20 | Memo 3, "the pattern of creating APIs for some of these websites" | Only one such API existed before this one (api.newsroom.sgit.ai); storyboards is a name with an empty repository. | [The article](/articles/independent-releases.html) says "two sites and a third announced", counted, not "a pattern across the estate". |
 | 2026-10-20 | Memo 4 | The memo asks for the centralised page to be published in the newsroom and imported from there. This session has write access to the two Send repositories only. | The page is published on [send.sgit.ai](https://send.sgit.ai/articles/every-site-its-own-articles.html) in the newsroom's article format so it can be imported unchanged, and the ask to move it is recorded under [what needs a human](/about/needs/). |
@@ -198,7 +198,7 @@ The brief ([published in full](/about/brief/)) is never edited to look right aft
 
 > The steps only the project lead can take for this host to be live, in order, with what each unblocks.
 
-*Source: <https://api.send.sgit.ai/about/needs/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/about/needs/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -206,11 +206,11 @@ The brief ([published in full](/about/brief/)) is never edited to look right aft
 
 Everything an agent could do is done; these steps need the lead's accounts.
 
-1. **Merge the branch to `dev`.** The deploy workflow runs on `dev`; the branch `claude/wonderful-ride-c8qicn` carries v0.1.0.
+1. **Merge the branch to `dev`.** The deploy workflow runs on `dev`; the branch `claude/wonderful-ride-c8qicn` carries v0.1.1.
 2. **Enable GitHub Pages for the repository** with the source set to GitHub Actions (the workflow's `configure-pages` step does this when the repository allows it).
 3. **DNS:** a `CNAME` record for `api.send.sgit.ai` pointing at `sgit-ai.github.io`. The `CNAME` file in the repository names the host; Pages will issue the certificate once the record resolves.
-4. **Let the first deploy finish.** Its last job polls the live host for up to ten minutes and compares every file of v0.1.0 with the manifest; until the DNS resolves it fails, by design.
-5. **An access token for the live round trip.** `releases/v0.1.0/tests/transfers.test.mjs` runs against the in-memory server; run the same calls against `https://dev.send.sgraph.ai` with a token to move interoperability from proposed to shipped in the reality file.
+4. **Let the first deploy finish.** Its last job polls the live host for up to ten minutes and compares every file of v0.1.1 with the manifest; until the DNS resolves it fails, by design.
+5. **An access token for the live round trip.** `releases/v0.1.1/tests/transfers.test.mjs` runs against the in-memory server; run the same calls against `https://dev.send.sgraph.ai` with a token to move interoperability from proposed to shipped in the reality file.
 6. **Decide where the articles live.** [Independent releases](/articles/independent-releases.html) is here; the guidance on every site's own articles is on send.sgit.ai; both are in the newsroom's format so they can be imported unchanged.
 
 
@@ -220,7 +220,7 @@ Everything an agent could do is done; these steps need the lead's accounts.
 
 > Who publishes this site, what they are building, and why that matters when reading its claims.
 
-*Source: <https://api.send.sgit.ai/about/participant/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/about/participant/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -239,20 +239,20 @@ Content is CC BY 4.0, code Apache-2.0, vendored files under their own licences i
 
 > The code-verified list of what this repository implements, generated from website/data/features.json on every build. If it is not listed here, it does not exist.
 
-*Source: <https://api.send.sgit.ai/about/reality/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/about/reality/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
 # Reality: what exists
 
-Generated from `website/data/features.json` on every build; audited 2026-10-20, v0.1.0, by reading releases/v0.1.0 and running its tests against the code. **If it is not listed here, it does not exist.** Status words: *shipped* (code, tests, served), *proposed* (described in a brief, no code), *absent* (asked about, not built, not planned yet).
+Generated from `website/data/features.json` on every build; audited 2026-10-20, v0.1.1, by reading releases/v0.1.1 and running its tests against the code. **If it is not listed here, it does not exist.** Status words: *shipped* (code, tests, served), *proposed* (described in a brief, no code), *absent* (asked about, not built, not planned yet).
 
 ## The release
 
 | Feature | Status | Since | Evidence |
 |---|---|---|---|
-| A release directory that is a complete, independent copy: nothing in it loads from another version or another host | <span class="sg-status sg-status-shipped">shipped</span> | v0.1.0 | `releases/v0.1.0/`; `tools/release.py check` fails on a reference outside the directory only by hash, see the note in corrections |
-| A manifest with the SHA-256 of every file, recomputed by the gate | <span class="sg-status sg-status-shipped">shipped</span> | v0.1.0 | `releases/v0.1.0/manifest.json`, `tools/release.py check` |
+| A release directory that is a complete, independent copy: nothing in it loads from another version or another host | <span class="sg-status sg-status-shipped">shipped</span> | v0.1.0 | `releases/v0.1.1/`; `tools/release.py check` fails on a reference outside the directory only by hash, see the note in corrections |
+| A manifest with the SHA-256 of every file, recomputed by the gate | <span class="sg-status sg-status-shipped">shipped</span> | v0.1.0 | `releases/v0.1.1/manifest.json`, `tools/release.py check` |
 | The live host checked file by file after a deploy | <span class="sg-status sg-status-shipped">shipped</span> | v0.1.0 | `tools/live_check.py`, the verify-live job; not yet run, the host has no DNS yet (see needs) |
 | Presigned or multipart uploads for payloads over 4 MB | <span class="sg-status sg-status-proposed">proposed</span> |  | `send-transfers.js` refuses with ETOOLARGE; the server route exists on send.sgraph.ai |
 
@@ -326,7 +326,7 @@ Generated from `website/data/features.json` on every build; audited 2026-10-20, 
 
 > Who does what on this repository, as files: one person, one build agent, and the roles borrowed from the SG/Send team when their expertise is needed.
 
-*Source: <https://api.send.sgit.ai/about/team/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/about/team/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -360,7 +360,7 @@ Work is files with a status line: the reality file's proposed rows are the backl
 
 > The brief for an agent that is about to use or change this API, in the order to read things, with the rules that are not negotiable and the prompt to start from.
 
-*Source: <https://api.send.sgit.ai/agents/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/agents/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -371,7 +371,7 @@ You are reading the index for agents of api.send.sgit.ai. Every page here has a 
 ## Read in this order
 
 1. [The reality file](/about/reality/): what exists. If it is not listed there, it does not exist, whatever a brief or this page implies.
-2. [The release's README](/v0.1.0/README.md) and its [manifest](/v0.1.0/manifest.json): the files you may load, with their hashes.
+2. [The release's README](/v0.1.1/README.md) and its [manifest](/v0.1.1/manifest.json): the files you may load, with their hashes.
 3. [The contracts](/docs/contracts/): the byte layouts, the link grammar, the token derivations. These are the parts that must not drift from send.sgraph.ai.
 4. [The server it speaks to](/docs/server/): the routes and the two secrets.
 5. [Independent releases](/docs/versioning/): how a change is made.
@@ -388,7 +388,7 @@ You are reading the index for agents of api.send.sgit.ai. Every page here has a 
 ## The prompt to start from
 
 ```
-Read https://api.send.sgit.ai/agents/index.md, then /about/reality.md, then /v0.1.0/README.md.
+Read https://api.send.sgit.ai/agents/index.md, then /about/reality.md, then /v0.1.1/README.md.
 The task: <what>. Work in releases/<next version>/, copied whole from the current release;
 never edit a published release or a vendored file. Add a test under tests/ that fails without
 the change and run `node --test 'tests/*.test.mjs'` there. Cut the manifest with
@@ -404,7 +404,7 @@ Report what you changed, what the tests prove, and what the reality file now say
 
 > The articles behind this API, in the newsroom's format, by the person who briefed it and by the agent that built it.
 
-*Source: <https://api.send.sgit.ai/articles/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/articles/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -422,7 +422,7 @@ Every `*.sgit.ai` site carries its own articles: the person's voice memos writte
 
 > A pattern is starting to repeat across the sgit.ai sites. A site gets a domain, storyboards.sgit.ai say, and beside it an api.storyboards.sgit.ai that holds the code the site runs, released and versioned on its own, the way api.newsroom.sgit.ai already does for the newsroom and api.send.sgit.ai now does for send.sgit.ai. The versioning comes from Iterative Flow Development, which I have written about for years, with one change that the last twelve months of working with agents made possible. In IFD a minor version holds only its surgical overrides and links back to the base; here every minor release is a complete, independent copy of all the code. No overlay, no shared file between versions, nothing in v0.1.1 that loads from v0.1.0. The quality control happens on each minor, the refactoring happens at the major, and because the scope of each of these APIs is deliberately small the copy costs nothing a reader would notice. What it buys is a release that can be read whole, hashed whole and reasoned about whole, by a person or by an agent, and a consuming site that cannot be changed under its readers. The shape is fractal on purpose, each component independent by itself, and I would like it to be the default for every api.<site>.sgit.ai that follows.
 
-*Source: <https://api.send.sgit.ai/articles/independent-releases.html> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/articles/independent-releases.html> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -497,7 +497,7 @@ A voice memo of mine on 20 October 2026, written up by the agent that built api.
 
 > I am the agent that built api.send.sgit.ai v0.1.0 and send.sgit.ai v0.1.0 in one session on 20 October 2026, from four voice memos Dinis Cruz recorded that morning. This is the account of what was built, with the files and the tests to check it against. The release is one directory of 34 files: ten ES modules for encrypting a file with its name inside the ciphertext, friendly tokens, the link grammar, the transfer client, QR codes, vaults over the vendored library, and a per-device keyring; two vendored libraries copied unchanged and hashed; forty-three tests that run against an implementation of the SG/Send API in memory, no mocks, including real vaults and two clients racing a publish. The website around it has a markdown twin for every page, a gate that fails on a broken link, a foreign origin, an em-dash or a credential shape, and a deploy that checks the live host file by file. It also records what it does not prove: the round trip against the live send.sgraph.ai is marked proposed until somebody with an access token runs it.
 
-*Source: <https://api.send.sgit.ai/articles/the-first-release.html> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/articles/the-first-release.html> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -564,7 +564,7 @@ Written by the build agent (a Claude session) on 20 October 2026, in its own voi
 
 > The ten modules of a release, what each exports, and the error codes a caller is expected to act on.
 
-*Source: <https://api.send.sgit.ai/docs/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/docs/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -573,8 +573,8 @@ Written by the build agent (a Claude session) on 20 October 2026, in its own voi
 One import gives every module as a namespace, plus `VERSION` and `RELEASE`:
 
 ```js
-import * as send from 'https://api.send.sgit.ai/v0.1.0/send/send-api.js'
-send.VERSION                       // 'v0.1.0'
+import * as send from 'https://api.send.sgit.ai/v0.1.1/send/send-api.js'
+send.VERSION                       // 'v0.1.1'
 send.crypto, send.envelope, send.friendly, send.words, send.link, send.qr, send.vault
 send.SendTransfers, send.TransferError, send.Keyring, send.KEYRING_KINDS
 ```
@@ -651,7 +651,7 @@ Errors are `TransferError` with a `code`:
 
 > The byte layouts and string grammars this release shares with send.sgraph.ai and with sgit, each with where it came from and the test that holds it.
 
-*Source: <https://api.send.sgit.ai/docs/contracts/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/docs/contracts/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -666,7 +666,7 @@ IV                 12 bytes    random, fresh per encryption, prepended
 ciphertext + tag   rest        AES-256-GCM; GCM appends its own 16-byte tag
 ```
 
-Exactly what `crypto.subtle.encrypt` returns with the IV in front, so a payload is 28 bytes larger than its plaintext. The key is 32 random bytes, shared as unpadded base64url, 43 characters. Source: send.sgraph.ai since v0.1.0, documented at [sgit.ai/api/transfers](https://sgit.ai/api/transfers.html). Held by `tests/crypto.test.mjs`.
+Exactly what `crypto.subtle.encrypt` returns with the IV in front, so a payload is 28 bytes larger than its plaintext. The key is 32 random bytes, shared as unpadded base64url, 43 characters. Source: send.sgraph.ai since v0.1.1, documented at [sgit.ai/api/transfers](https://sgit.ai/api/transfers.html). Held by `tests/crypto.test.mjs`.
 
 ## The envelope {#envelope}
 
@@ -733,7 +733,7 @@ The vendored library owns this contract and this release does not restate it: re
 
 > How a release is served, what a consuming site pins and checks, the CORS the host sends, and the subresource integrity question.
 
-*Source: <https://api.send.sgit.ai/docs/hosting/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/docs/hosting/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -748,7 +748,7 @@ GitHub Pages sends `access-control-allow-origin: *`, which is what lets a module
 ## What a site pins
 
 ```json
-{ "host": "https://api.send.sgit.ai", "release": "v0.1.0" }
+{ "host": "https://api.send.sgit.ai", "release": "v0.1.1" }
 ```
 
 One file, one line. The site copies the release's `manifest.json` beside it, and its gate fails the build on a reference to this host that is not pinned to that release or not a path in the manifest. send.sgit.ai does this in `admin/build/api.json` and its `tools/check.py`.
@@ -768,7 +768,7 @@ Release files are immutable by construction, so a CDN may cache them for as long
 
 > The routes this release calls on the SG/Send API, the two secrets, what the in-memory server in tests/server.mjs implements, and the field names it has not verified against production.
 
-*Source: <https://api.send.sgit.ai/docs/server/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/docs/server/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -787,6 +787,7 @@ The modules talk HTTP to an SG/Send API host. The hosted one is `https://send.sg
 | `GET /api/transfers/download/{id}` | none | the bytes; 410 once expired or exhausted; 404 when it never existed or was deleted |
 | `GET /api/transfers/download-base64/{id}` | none | the same bytes in JSON |
 | `DELETE /api/transfers/delete/{id}` | token + `x-sgraph-transfer-delete-auth` | only if a `delete_auth_hash` was set at create |
+| `GET /api/info/health`, `GET /api/info/version` | none | the server's own health and version. **Not** `/api/health`: measured a 404 there on 20 October 2026, which v0.1.0 got wrong |
 
 ## Vaults
 
@@ -799,6 +800,10 @@ The **access token** is presented as `x-sgraph-access-token`. The API also accep
 ## What the in-memory server implements
 
 Everything in the two tables, plus `GET /api/health` and `GET /api/presigned/capabilities` (reporting no presigned support), with CORS as measured on the real host: any origin, the sgraph headers allowed, `X-API-Key` refused on preflight. It records methods, paths and statuses in a log the tests read, and never a key or a token.
+
+## Measured against the hosted service, 20 October 2026
+
+After the first deploy, from this repository: `send.sgraph.ai` answers a preflight from `https://send.sgit.ai` with `access-control-allow-origin: *` and allows every header this release sends (`x-sgraph-access-token`, `x-sgraph-vault-write-key`, `x-sgraph-vault-enum-key`, `x-sgraph-transfer-delete-auth`); `GET /api/transfers/info/<unknown>` is a 404 in under a second; `/api/health` is a 404 and the health route is `/api/info/health`, which is the v0.1.1 fix.
 
 ## What is not verified against production
 
@@ -816,7 +821,7 @@ Stated here rather than guessed at, per [the reality file](/about/reality/):
 
 > Every minor release is a complete copy of the code with no overlays and no shared files; majors are where the refactoring happens. The rules, the reasons, and how this differs from the IFD that came before it.
 
-*Source: <https://api.send.sgit.ai/docs/versioning/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/docs/versioning/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -824,7 +829,7 @@ Stated here rather than guessed at, per [the reality file](/about/reality/):
 
 ## The rule
 
-Every release under `releases/` is a complete, independent copy of the code. `v0.1.1` starts as a copy of `v0.1.0`, changed where the change is; nothing in it imports from `v0.1.0`, overrides a method of `v0.1.0`, or loads a stylesheet of `v0.1.0`. A page that pins `v0.1.0` keeps running `v0.1.0` whatever lands after it.
+Every release under `releases/` is a complete, independent copy of the code. `v0.1.1` starts as a copy of `v0.1.1`, changed where the change is; nothing in it imports from `v0.1.1`, overrides a method of `v0.1.1`, or loads a stylesheet of `v0.1.1`. A page that pins `v0.1.1` keeps running `v0.1.1` whatever lands after it.
 
 | Kind | Example | What happens |
 |---|---|---|
@@ -843,7 +848,7 @@ The [IFD methodology](https://github.com/the-cyber-boardroom/SGraph-AI__App__Sen
 
 ## The mechanics
 
-1. `cp -r releases/v0.1.0 releases/v0.1.1`, then make the change in `v0.1.1` only.
+1. `cp -r releases/v0.1.1 releases/v0.1.1`, then make the change in `v0.1.1` only.
 2. `VERSION = 'v0.1.1'` in `send/send-api.js`; the gate checks it matches the directory.
 3. A test in `tests/` that fails without the change; `node --test 'tests/*.test.mjs'` green.
 4. `python3 tools/release.py cut v0.1.1` writes the manifest; `tools/version.json` says `release: v0.1.1`.
@@ -859,7 +864,7 @@ The [IFD methodology](https://github.com/the-cyber-boardroom/SGraph-AI__App__Sen
 
 > How to take a release into a site, what to pin, what the gate should check, what runs where, and how to run the tests and the server in memory.
 
-*Source: <https://api.send.sgit.ai/for-developers/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/for-developers/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -867,9 +872,9 @@ The [IFD methodology](https://github.com/the-cyber-boardroom/SGraph-AI__App__Sen
 
 ## Take a release
 
-1. Name the release in one file of your site, for example `build/api.json`: `{ "host": "https://api.send.sgit.ai", "release": "v0.1.0" }`.
-2. Copy `https://api.send.sgit.ai/v0.1.0/manifest.json` next to it, so your build knows the hash of every file it may load.
-3. Load the code by its full address, `https://api.send.sgit.ai/v0.1.0/send/send-api.js`, in a `<script type="module">` or an import map.
+1. Name the release in one file of your site, for example `build/api.json`: `{ "host": "https://api.send.sgit.ai", "release": "v0.1.1" }`.
+2. Copy `https://api.send.sgit.ai/v0.1.1/manifest.json` next to it, so your build knows the hash of every file it may load.
+3. Load the code by its full address, `https://api.send.sgit.ai/v0.1.1/send/send-api.js`, in a `<script type="module">` or an import map.
 4. Add a check to your gate: every reference to this host is pinned to the release you named and is a path in the manifest. send.sgit.ai's gate does exactly this.
 
 A script loaded from another host still runs on your page's origin, so the keyring, the clone branch and everything the modules store stay in your site's storage. This host has no way to receive anything.
@@ -886,7 +891,7 @@ A script loaded from another host still runs on your page's origin, so the keyri
 ## Run the tests
 
 ```
-cd releases/v0.1.0
+cd releases/v0.1.1
 node --test 'tests/*.test.mjs'
 ```
 
@@ -895,14 +900,14 @@ node --test 'tests/*.test.mjs'
 ## Run the server for local development
 
 ```
-node releases/v0.1.0/tests/server.mjs 8787 local-dev-token
+node releases/v0.1.1/tests/server.mjs 8787 local-dev-token
 ```
 
 Point a page at `http://localhost:8787` with the access token `local-dev-token` and everything works without an account: transfers, vaults, download caps, expiry, revocation. It forgets everything when it stops. [The server it speaks to](/docs/server/) lists the routes.
 
 ## Make a change
 
-A change to a served file is a new release: copy `releases/v0.1.0/` to `releases/v0.1.1/`, make the change there with a test that fails without it, cut the manifest, bump `tools/version.json`, and let the gate and the pipeline do the rest. [How to make a release](/how-to/make-a-release/) is the checklist; [independent releases](/docs/versioning/) is why it works this way.
+A change to a served file is a new release: copy `releases/v0.1.1/` to `releases/v0.1.1/`, make the change there with a test that fails without it, cut the manifest, bump `tools/version.json`, and let the gate and the pipeline do the rest. [How to make a release](/how-to/make-a-release/) is the checklist; [independent releases](/docs/versioning/) is why it works this way.
 
 
 ==============================================================================
@@ -911,7 +916,7 @@ A change to a served file is a new release: copy `releases/v0.1.0/` to `releases
 
 > The trust boundaries, what leaves the browser and what never does, the supply chain of this release and how to verify the live host yourself.
 
-*Source: <https://api.send.sgit.ai/for-evaluators/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/for-evaluators/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -944,12 +949,12 @@ The **access token** says who may upload. The **decryption key** says who may re
 
 ```
 curl -s https://api.send.sgit.ai/releases.json | python3 -m json.tool
-curl -s https://api.send.sgit.ai/v0.1.0/manifest.json > manifest.json
+curl -s https://api.send.sgit.ai/v0.1.1/manifest.json > manifest.json
 python3 - <<'PY'
 import hashlib, json, urllib.request
 m = json.load(open('manifest.json'))
 for f, e in m['entries'].items():
-    b = urllib.request.urlopen(f"https://api.send.sgit.ai/v0.1.0/{f}").read()
+    b = urllib.request.urlopen(f"https://api.send.sgit.ai/v0.1.1/{f}").read()
     print('ok ' if hashlib.sha256(b).hexdigest() == e['sha256'] else 'BAD', f)
 PY
 ```
@@ -969,7 +974,7 @@ That is the same check `tools/live_check.py` runs at the end of every deploy. Un
 
 > The short, command-shaped guides: make a release, run the tests.
 
-*Source: <https://api.send.sgit.ai/how-to/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/how-to/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -985,16 +990,16 @@ That is the same check `tools/live_check.py` runs at the end of every deploy. Un
 
 > The checklist, from copying the current release to checking the live host, with the commands.
 
-*Source: <https://api.send.sgit.ai/how-to/make-a-release/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/how-to/make-a-release/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
 # How to make a release
 
 ```
-cp -r releases/v0.1.0 releases/v0.1.1          # 1. a complete copy; change only v0.1.1
+cp -r releases/v0.1.1 releases/v0.1.1          # 1. a complete copy; change only v0.1.1
 # 2. make the change, and a test under releases/v0.1.1/tests/ that fails without it
-sed -i "s/VERSION = 'v0.1.0'/VERSION = 'v0.1.1'/" releases/v0.1.1/send/send-api.js
+sed -i "s/VERSION = 'v0.1.1'/VERSION = 'v0.1.1'/" releases/v0.1.1/send/send-api.js
 (cd releases/v0.1.1 && node --test 'tests/*.test.mjs')
 python3 tools/release.py cut v0.1.1            # 3. the manifest
 # 4. tools/version.json: version v0.1.1, release v0.1.1, today's date
@@ -1014,7 +1019,7 @@ What the gate will refuse: a release directory whose files differ from its manif
 
 > The Node tests against the in-memory server, the browser smoke test in Chromium, and the gate; what each proves.
 
-*Source: <https://api.send.sgit.ai/how-to/run-the-tests/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/how-to/run-the-tests/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -1023,7 +1028,7 @@ What the gate will refuse: a release directory whose files differ from its manif
 ## In Node, against the server in memory
 
 ```
-cd releases/v0.1.0
+cd releases/v0.1.1
 node --test 'tests/*.test.mjs'
 ```
 
@@ -1052,7 +1057,7 @@ What CI runs on every commit. [The modules](/docs/) lists the error codes the te
 
 > Every release of the reader code, newest first, with its date, size and manifest. A release is never edited after it is published.
 
-*Source: <https://api.send.sgit.ai/releases/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/releases/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -1062,6 +1067,7 @@ A release is a directory under `/vX.Y.Z/` on this host, served exactly as it is 
 
 | Release | Date | Files | Bytes | Manifest | README |
 |---|---|---|---|---|---|
+| **v0.1.1** | 2026-10-20 | 36 | 276,069 | [manifest.json](/v0.1.1/manifest.json) | [README](/v0.1.1/README.md) |
 | **v0.1.0** | 2026-10-20 | 36 | 274,733 | [manifest.json](/v0.1.0/manifest.json) | [README](/v0.1.0/README.md) |
 
 The website around the releases has versions of its own, one per change that lands on `dev`; [the version history](/versions/) has a line for each.
@@ -1073,7 +1079,7 @@ The website around the releases has versions of its own, one per change that lan
 
 > Twelve lines to encrypt a file in the browser, upload it as a transfer, and hand over a link and a QR code; and the two lines that open it.
 
-*Source: <https://api.send.sgit.ai/start/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/start/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -1085,7 +1091,7 @@ Three things to have in their places before the first line of code. **The access
 
 ```html
 <script type="module">
-  import * as send from 'https://api.send.sgit.ai/v0.1.0/send/send-api.js'
+  import * as send from 'https://api.send.sgit.ai/v0.1.1/send/send-api.js'
 </script>
 ```
 
@@ -1151,7 +1157,7 @@ A vault is versioned, browsable, updatable, and clonable with `sgit clone <read 
 
 > One line per version, newest first, saying what changed and why. Every change that lands on dev is a version; the deploy tags it.
 
-*Source: <https://api.send.sgit.ai/versions/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/versions/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -1161,4 +1167,5 @@ Every change that lands on `dev` is a version, in `tools/version.json`, tagged b
 
 | Version | Date | Kind | What changed, and why |
 |---|---|---|---|
+| **v0.1.1** | 2026-10-20 | fix | **the health check asks the route the hosted service serves.** Measured against send.sgraph.ai after the first deploy: /api/health is a 404 there and the health route is /api/info/health, so Settings on send.sgit.ai reported the hosted server as not answering. v0.1.1 is a whole copy of v0.1.0 with health() on /api/info/health, a new version() on /api/info/version, the in-memory server serving the same two routes and answering 404 on /api/health as production does, and a test that holds all of that. The CORS check the same run made is recorded on the server page: the hosted service allows any origin and every header this release sends. |
 | **v0.1.0** | 2026-10-20 | release | **the first release: the modules send.sgit.ai runs, as one independent directory, with its tests and the server in memory.** From the four voice memos of 20 October 2026 (the brief, published in full). The modules: AES-256-GCM crypto with the SGMETA envelope, friendly tokens with the derivations send.sgraph.ai uses, the link grammar, the transfer client with send() and receive(), QR codes as SVG, the vault layer over the vendored library (publish with compare-and-swap, never push()), and the per-device keyring. 43 tests run in Node against the in-memory server; a browser smoke test runs the same modules in Chromium. The website, the gate and the release tooling come with it. |

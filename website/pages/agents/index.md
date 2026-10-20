@@ -10,7 +10,7 @@ You are reading the index for agents of api.send.sgit.ai. Every page here has a 
 ## Read in this order
 
 1. [The reality file](/about/reality/): what exists. If it is not listed there, it does not exist, whatever a brief or this page implies.
-2. [The release's README](/v0.1.0/README.md) and its [manifest](/v0.1.0/manifest.json): the files you may load, with their hashes.
+2. [The release's README](/v0.1.1/README.md) and its [manifest](/v0.1.1/manifest.json): the files you may load, with their hashes.
 3. [The contracts](/docs/contracts/): the byte layouts, the link grammar, the token derivations. These are the parts that must not drift from send.sgraph.ai.
 4. [The server it speaks to](/docs/server/): the routes and the two secrets.
 5. [Independent releases](/docs/versioning/): how a change is made.
@@ -27,7 +27,7 @@ You are reading the index for agents of api.send.sgit.ai. Every page here has a 
 ## The prompt to start from
 
 ```
-Read https://api.send.sgit.ai/agents/index.md, then /about/reality.md, then /v0.1.0/README.md.
+Read https://api.send.sgit.ai/agents/index.md, then /about/reality.md, then /v0.1.1/README.md.
 The task: <what>. Work in releases/<next version>/, copied whole from the current release;
 never edit a published release or a vendored file. Add a test under tests/ that fails without
 the change and run `node --test 'tests/*.test.mjs'` there. Cut the manifest with

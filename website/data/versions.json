@@ -1,6 +1,14 @@
 {
   "versions": [
     {
+      "version": "v0.1.1",
+      "release": "v0.1.1",
+      "date": "2026-10-20",
+      "kind": "fix",
+      "title": "the health check asks the route the hosted service serves",
+      "notes": "Measured against send.sgraph.ai after the first deploy: /api/health is a 404 there and the health route is /api/info/health, so Settings on send.sgit.ai reported the hosted server as not answering. v0.1.1 is a whole copy of v0.1.0 with health() on /api/info/health, a new version() on /api/info/version, the in-memory server serving the same two routes and answering 404 on /api/health as production does, and a test that holds all of that. The CORS check the same run made is recorded on the server page: the hosted service allows any origin and every header this release sends."
+    },
+    {
       "version": "v0.1.0",
       "release": "v0.1.0",
       "date": "2026-10-20",

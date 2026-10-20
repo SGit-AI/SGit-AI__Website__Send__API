@@ -2,7 +2,7 @@
 
 > The ten modules of a release, what each exports, and the error codes a caller is expected to act on.
 
-*Source: <https://api.send.sgit.ai/docs/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/docs/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -11,8 +11,8 @@
 One import gives every module as a namespace, plus `VERSION` and `RELEASE`:
 
 ```js
-import * as send from 'https://api.send.sgit.ai/v0.1.0/send/send-api.js'
-send.VERSION                       // 'v0.1.0'
+import * as send from 'https://api.send.sgit.ai/v0.1.1/send/send-api.js'
+send.VERSION                       // 'v0.1.1'
 send.crypto, send.envelope, send.friendly, send.words, send.link, send.qr, send.vault
 send.SendTransfers, send.TransferError, send.Keyring, send.KEYRING_KINDS
 ```

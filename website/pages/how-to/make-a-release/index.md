@@ -6,9 +6,9 @@ description: The checklist, from copying the current release to checking the liv
 # How to make a release
 
 ```
-cp -r releases/v0.1.0 releases/v0.1.1          # 1. a complete copy; change only v0.1.1
+cp -r releases/v0.1.1 releases/v0.1.1          # 1. a complete copy; change only v0.1.1
 # 2. make the change, and a test under releases/v0.1.1/tests/ that fails without it
-sed -i "s/VERSION = 'v0.1.0'/VERSION = 'v0.1.1'/" releases/v0.1.1/send/send-api.js
+sed -i "s/VERSION = 'v0.1.1'/VERSION = 'v0.1.1'/" releases/v0.1.1/send/send-api.js
 (cd releases/v0.1.1 && node --test 'tests/*.test.mjs')
 python3 tools/release.py cut v0.1.1            # 3. the manifest
 # 4. tools/version.json: version v0.1.1, release v0.1.1, today's date

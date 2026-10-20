@@ -1,0 +1,153 @@
+{
+  "release": "v0.1.1",
+  "date": "2026-10-20",
+  "files": 36,
+  "bytes": 276069,
+  "note": "A complete, independent copy of the code. Never edited after publishing: a change is the next release.",
+  "entries": {
+    "README.md": {
+      "bytes": 2075,
+      "sha256": "5f8b89db3cf3232b544d9b4d42cc91c19bcde1bdc734c44a73a9165414a306fe"
+    },
+    "send/send-api.js": {
+      "bytes": 1125,
+      "sha256": "17f294e714dc81eb6a0a372e7080a2350c21c84c6b8200b350f149cb16982fbd"
+    },
+    "send/send-crypto.js": {
+      "bytes": 5212,
+      "sha256": "550a5614aa80205d749dd9ea39e183e267313081b72447688855feee0cd6eca2"
+    },
+    "send/send-envelope.js": {
+      "bytes": 2240,
+      "sha256": "f2703951a83f1710dcf268563c89c9f5339c7e53257a41f42eaa515803ded3f1"
+    },
+    "send/send-friendly.js": {
+      "bytes": 2449,
+      "sha256": "d80478e1e08824eaf3746fefe2bffd1770c140c81de6c8fa5dfafe4a109dc49b"
+    },
+    "send/send-keyring.js": {
+      "bytes": 4532,
+      "sha256": "74163e399f6fde018a304c915322e5657a3067874174333ff6024d0695511489"
+    },
+    "send/send-link.js": {
+      "bytes": 5374,
+      "sha256": "cf4596f550f35154047a0cf492de1dcad678ec40d8f5aa6c7ab53af68149baa9"
+    },
+    "send/send-qr.js": {
+      "bytes": 2355,
+      "sha256": "e662cc18a59e67c880c0e437ed8e7aacd332f3712ba217723928bea5df034e19"
+    },
+    "send/send-transfers.js": {
+      "bytes": 9950,
+      "sha256": "d865e747b40128105f1ed41bd249a150258e3ab773c3364a0770b8351acd87cf"
+    },
+    "send/send-vault-expose.js": {
+      "bytes": 619,
+      "sha256": "c29bf87b2cd66ce945f00d2ab72bab0ae57f33b5a642fa7004cdf3c690aa93ca"
+    },
+    "send/send-vault.js": {
+      "bytes": 9451,
+      "sha256": "f8b4b4355f104a84e530dabcf0a00d82f214e8b4b523f4c3dd4e2af30659cb91"
+    },
+    "send/send-words.js": {
+      "bytes": 3713,
+      "sha256": "de985545440ca2927661b261c1d00dfeba86c26b724d59b0a4f3694c9c7676a6"
+    },
+    "tests/_lib.mjs": {
+      "bytes": 1509,
+      "sha256": "e4f24c5cfb7c8a8c4e0d798c5d583e9bc05b78e1e5130e3700dd88463962dcf7"
+    },
+    "tests/browser.html": {
+      "bytes": 3591,
+      "sha256": "e6f19c1b5c036bd64550b15cf9e201017eb430c198bdacdcaf196c4bd04da300"
+    },
+    "tests/crypto.test.mjs": {
+      "bytes": 2930,
+      "sha256": "e49b50e1cf46e73cf424e55e025e8c7821fae8c31e00d18b039894cf081559ee"
+    },
+    "tests/keyring.test.mjs": {
+      "bytes": 1961,
+      "sha256": "30661fa36f62e907d232a156a06e6ddeb1aff04897b4faacb8d0db402950e446"
+    },
+    "tests/link.test.mjs": {
+      "bytes": 4201,
+      "sha256": "47e0593d66d2ea31d34ff1448b7542d1d420589719a550bed5d72288e507836e"
+    },
+    "tests/qr.test.mjs": {
+      "bytes": 1280,
+      "sha256": "007b3f99314b6ccfc295a7d62ddffc308b66707ce5f43f99d23415de731db71b"
+    },
+    "tests/server.mjs": {
+      "bytes": 14663,
+      "sha256": "b418b516ed30418e5fe827c869ee3482519bb0e335307edc6ff54a74093774aa"
+    },
+    "tests/transfers.test.mjs": {
+      "bytes": 5979,
+      "sha256": "db3041e507bfabaf205680ced0fceded2b0f9e0975110de456e21f175f4f6ce3"
+    },
+    "tests/vault.test.mjs": {
+      "bytes": 5384,
+      "sha256": "fbafcbdfc55668b8dd519f00b6ab376a1abea4ee114d3b656802371207739640"
+    },
+    "vendor/qrcode-generator/2.0.4/README.md": {
+      "bytes": 574,
+      "sha256": "90a34b54b23c31165eafd9d639cb3f1c5822b32dcc9dff67bd37ccfd113d1ddb"
+    },
+    "vendor/qrcode-generator/2.0.4/qrcode.mjs": {
+      "bytes": 51907,
+      "sha256": "ea91d7118a5395289170da848b7c6758b996163bfbccf312591ab65a4911b7c0"
+    },
+    "vendor/sg-vault/v0.2.3/VENDOR.md": {
+      "bytes": 3283,
+      "sha256": "72b1b247062e1cd0b9502fb689c5e5d90bc79c27d9696af2047f1a2fccf7e9af"
+    },
+    "vendor/sg-vault/v0.2.3/sg-send/sg-send-crypto.js": {
+      "bytes": 4927,
+      "sha256": "2c4af16bbaf4f43e7eb0f8298a9cd8338429f99c7bec20c5d7f4da96c88e39ce"
+    },
+    "vendor/sg-vault/v0.2.3/sg-send/sg-send.js": {
+      "bytes": 12989,
+      "sha256": "9bc98e580f5fc1adbf8e2d273181e6afa3bd9a3813ea8a1bf24ddd07e1b8b41e"
+    },
+    "vendor/sg-vault/v0.2.3/sg-vault/sg-vault--branches.js": {
+      "bytes": 2178,
+      "sha256": "bc1eec8bbc2326a73ec1809ed588d26f3fe7511bf24b52e47440c3d90526f3d1"
+    },
+    "vendor/sg-vault/v0.2.3/sg-vault/sg-vault--file-ops.js": {
+      "bytes": 7212,
+      "sha256": "f114db89754638b5e4ade1dc3f5d4753ac672a4323c286e8c8ed0412760e6861"
+    },
+    "vendor/sg-vault/v0.2.3/sg-vault/sg-vault--folder-ops.js": {
+      "bytes": 5680,
+      "sha256": "10fea1377422c5368aead040500c28135fafcb918427901a74483e23e1b36d7f"
+    },
+    "vendor/sg-vault/v0.2.3/sg-vault/sg-vault--history.js": {
+      "bytes": 4142,
+      "sha256": "265b215e27216ad25e8fa7c83b47c8307b7990a0a3fb88254ee2149d2835dd2d"
+    },
+    "vendor/sg-vault/v0.2.3/sg-vault/sg-vault--sync.js": {
+      "bytes": 20598,
+      "sha256": "b9f521e7b70ca66f6d1197378337f954deea4ed3468535ec3064149c7cf1fcc6"
+    },
+    "vendor/sg-vault/v0.2.3/sg-vault/sg-vault-commit.js": {
+      "bytes": 6645,
+      "sha256": "e686de3756eaeed185708a6ba96194429afb3067f145108e7580d876598dd9ce"
+    },
+    "vendor/sg-vault/v0.2.3/sg-vault/sg-vault-crypto.js": {
+      "bytes": 14862,
+      "sha256": "f8d31359204a9e333d27444ea2a37c1bb11bbc790d0cf4cfa95fe9f9282d6e66"
+    },
+    "vendor/sg-vault/v0.2.3/sg-vault/sg-vault-object-store.js": {
+      "bytes": 14057,
+      "sha256": "a45d7ad0f9dbd91677785c3128a8322d4209cb35ab5d815551dcbf1eceed9c9e"
+    },
+    "vendor/sg-vault/v0.2.3/sg-vault/sg-vault-ref-manager.js": {
+      "bytes": 8368,
+      "sha256": "5b8ea87ace83d59e8954511d9932bd3968020c57070375194c7427a083fb729f"
+    },
+    "vendor/sg-vault/v0.2.3/sg-vault/sg-vault.js": {
+      "bytes": 28054,
+      "sha256": "0108884f9b8d539e4c9457190326d64adc5a92c808803f0dab14b9e772b3ad26"
+    }
+  }
+}

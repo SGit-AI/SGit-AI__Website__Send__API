@@ -2,7 +2,7 @@
 
 > How a release is served, what a consuming site pins and checks, the CORS the host sends, and the subresource integrity question.
 
-*Source: <https://api.send.sgit.ai/docs/hosting/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/docs/hosting/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -17,7 +17,7 @@ GitHub Pages sends `access-control-allow-origin: *`, which is what lets a module
 ## What a site pins
 
 ```json
-{ "host": "https://api.send.sgit.ai", "release": "v0.1.0" }
+{ "host": "https://api.send.sgit.ai", "release": "v0.1.1" }
 ```
 
 One file, one line. The site copies the release's `manifest.json` beside it, and its gate fails the build on a reference to this host that is not pinned to that release or not a path in the manifest. send.sgit.ai does this in `admin/build/api.json` and its `tools/check.py`.

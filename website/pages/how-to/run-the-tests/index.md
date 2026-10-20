@@ -8,7 +8,7 @@ description: The Node tests against the in-memory server, the browser smoke test
 ## In Node, against the server in memory
 
 ```
-cd releases/v0.1.0
+cd releases/v0.1.1
 node --test 'tests/*.test.mjs'
 ```
 

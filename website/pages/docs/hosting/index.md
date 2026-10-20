@@ -14,7 +14,7 @@ GitHub Pages sends `access-control-allow-origin: *`, which is what lets a module
 ## What a site pins
 
 ```json
-{ "host": "https://api.send.sgit.ai", "release": "v0.1.0" }
+{ "host": "https://api.send.sgit.ai", "release": "v0.1.1" }
 ```
 
 One file, one line. The site copies the release's `manifest.json` beside it, and its gate fails the build on a reference to this host that is not pinned to that release or not a path in the manifest. send.sgit.ai does this in `admin/build/api.json` and its `tools/check.py`.

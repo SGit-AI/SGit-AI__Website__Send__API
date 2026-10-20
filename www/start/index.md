@@ -2,7 +2,7 @@
 
 > Twelve lines to encrypt a file in the browser, upload it as a transfer, and hand over a link and a QR code; and the two lines that open it.
 
-*Source: <https://api.send.sgit.ai/start/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/start/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -14,7 +14,7 @@ Three things to have in their places before the first line of code. **The access
 
 ```html
 <script type="module">
-  import * as send from 'https://api.send.sgit.ai/v0.1.0/send/send-api.js'
+  import * as send from 'https://api.send.sgit.ai/v0.1.1/send/send-api.js'
 </script>
 ```
 

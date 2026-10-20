@@ -7,7 +7,7 @@ description: The four voice memos of 20 October 2026 that started this repositor
 
 A repository here starts from a brief published in full, written by a person or by an agent from the person's words, and never edited afterwards to look right; corrections go in [the corrections file](/about/corrections/). These are the four voice memos Dinis Cruz recorded on 20 October 2026 and handed to the agent in one session, as transcribed. The reading of them that the agent worked from is at the end; where that reading was wrong, the corrections file says so.
 
-**Status:** accepted, 20 October 2026, by being handed to the session with "let's build this". **What was built from them:** this repository and [send.sgit.ai](https://send.sgit.ai), both at v0.1.0; [the reality file](/about/reality/) says which parts exist.
+**Status:** accepted, 20 October 2026, by being handed to the session with "let's build this". **What was built from them:** this repository and [send.sgit.ai](https://send.sgit.ai), both at v0.1.1; [the reality file](/about/reality/) says which parts exist.
 
 ## Memo 01: Refactoring SG/Send to sgit.ai {#memo-01}
 

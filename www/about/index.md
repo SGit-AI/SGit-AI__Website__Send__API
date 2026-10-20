@@ -2,7 +2,7 @@
 
 > What api.send.sgit.ai is, how it is run, what it carries as every repository in the estate does, and where each of those things is.
 
-*Source: <https://api.send.sgit.ai/about/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/about/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -19,7 +19,7 @@ It follows [what every sgit repository carries](https://sgit.ai/docs/guidance/re
 | The corrections file | [/about/corrections/](/about/corrections/), `BRIEF-CORRECTIONS.md` |
 | One version, going up on every push | `tools/version.json`, shown in every header, [the history](/versions/) |
 | The gate | `tools/check.py`, [what it checks](/how-to/make-a-release/) |
-| Tests against real things | `releases/v0.1.0/tests/`, [how to run them](/how-to/run-the-tests/) |
+| Tests against real things | `releases/v0.1.1/tests/`, [how to run them](/how-to/run-the-tests/) |
 | The review folder | `review/intent/`: the brief as sections; the derived graph is proposed |
 | Roles and a board, as files | [/about/team/](/about/team/), `team/` |
 | A credentials tier that is never committed | nothing in this repository needs a credential; the tripwire scans every tracked file anyway |

@@ -2,7 +2,7 @@
 
 > The routes this release calls on the SG/Send API, the two secrets, what the in-memory server in tests/server.mjs implements, and the field names it has not verified against production.
 
-*Source: <https://api.send.sgit.ai/docs/server/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/docs/server/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -21,6 +21,7 @@ The modules talk HTTP to an SG/Send API host. The hosted one is `https://send.sg
 | `GET /api/transfers/download/{id}` | none | the bytes; 410 once expired or exhausted; 404 when it never existed or was deleted |
 | `GET /api/transfers/download-base64/{id}` | none | the same bytes in JSON |
 | `DELETE /api/transfers/delete/{id}` | token + `x-sgraph-transfer-delete-auth` | only if a `delete_auth_hash` was set at create |
+| `GET /api/info/health`, `GET /api/info/version` | none | the server's own health and version. **Not** `/api/health`: measured a 404 there on 20 October 2026, which v0.1.0 got wrong |
 
 ## Vaults
 
@@ -33,6 +34,10 @@ The **access token** is presented as `x-sgraph-access-token`. The API also accep
 ## What the in-memory server implements
 
 Everything in the two tables, plus `GET /api/health` and `GET /api/presigned/capabilities` (reporting no presigned support), with CORS as measured on the real host: any origin, the sgraph headers allowed, `X-API-Key` refused on preflight. It records methods, paths and statuses in a log the tests read, and never a key or a token.
+
+## Measured against the hosted service, 20 October 2026
+
+After the first deploy, from this repository: `send.sgraph.ai` answers a preflight from `https://send.sgit.ai` with `access-control-allow-origin: *` and allows every header this release sends (`x-sgraph-access-token`, `x-sgraph-vault-write-key`, `x-sgraph-vault-enum-key`, `x-sgraph-transfer-delete-auth`); `GET /api/transfers/info/<unknown>` is a 404 in under a second; `/api/health` is a 404 and the health route is `/api/info/health`, which is the v0.1.1 fix.
 
 ## What is not verified against production
 

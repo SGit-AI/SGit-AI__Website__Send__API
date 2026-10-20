@@ -4,7 +4,7 @@
   "host": "https://api.send.sgit.ai",
   "cname": "api.send.sgit.ai",
   "description": "The client-side API behind send.sgit.ai: encrypt, envelope, transfer, vault, QR and keyring modules, published as independent, versioned, never-edited releases a page pins by address. No server, nothing to deploy but files.",
-  "stage": "v0.1.0, first release",
+  "stage": "v0.1.1, first release",
   "source": "https://github.com/SGit-AI/SGit-AI__Website__Send__API",
   "parent": { "name": "sgit.ai", "href": "https://sgit.ai", "title": "sgit.ai: the parent project, git for encrypted vaults" },
   "theme_key": "sgit.send.api.ui.theme",
@@ -12,8 +12,8 @@
   "network": "Part of the sgit.ai network: <a href=\"https://sgit.ai\">sgit.ai</a> · <a href=\"https://send.sgit.ai\">send.sgit.ai</a> (the site this API serves) · <a href=\"https://api.newsroom.sgit.ai\">api.newsroom.sgit.ai</a> (the same pattern for the newsroom) · <a href=\"https://newsroom.sgit.ai\">newsroom.sgit.ai</a> · <a href=\"https://secrets.sgit.ai\">secrets.sgit.ai</a> · <a href=\"https://sgit.ai/network/\">the full network</a>",
   "llms_intro": "This host publishes the client-side code send.sgit.ai runs, as releases at /vX.Y.Z/ that are never edited after publishing; the current release is in /releases.json. Source: https://github.com/SGit-AI/SGit-AI__Website__Send__API",
   "llms_extra": [
-    "[The current release's manifest](/v0.1.0/manifest.json): every file with its size and SHA-256",
-    "[The release's README](/v0.1.0/README.md): the modules and what each does",
+    "[The current release's manifest](/v0.1.1/manifest.json): every file with its size and SHA-256",
+    "[The release's README](/v0.1.1/README.md): the modules and what each does",
     "[releases.json](/releases.json): every release, newest first"
   ],
   "nav": [

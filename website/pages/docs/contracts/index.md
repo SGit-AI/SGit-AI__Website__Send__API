@@ -14,7 +14,7 @@ IV                 12 bytes    random, fresh per encryption, prepended
 ciphertext + tag   rest        AES-256-GCM; GCM appends its own 16-byte tag
 ```
 
-Exactly what `crypto.subtle.encrypt` returns with the IV in front, so a payload is 28 bytes larger than its plaintext. The key is 32 random bytes, shared as unpadded base64url, 43 characters. Source: send.sgraph.ai since v0.1.0, documented at [sgit.ai/api/transfers](https://sgit.ai/api/transfers.html). Held by `tests/crypto.test.mjs`.
+Exactly what `crypto.subtle.encrypt` returns with the IV in front, so a payload is 28 bytes larger than its plaintext. The key is 32 random bytes, shared as unpadded base64url, 43 characters. Source: send.sgraph.ai since v0.1.1, documented at [sgit.ai/api/transfers](https://sgit.ai/api/transfers.html). Held by `tests/crypto.test.mjs`.
 
 ## The envelope {#envelope}
 

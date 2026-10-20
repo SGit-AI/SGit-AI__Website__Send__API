@@ -2,7 +2,7 @@
 
 > The byte layouts and string grammars this release shares with send.sgraph.ai and with sgit, each with where it came from and the test that holds it.
 
-*Source: <https://api.send.sgit.ai/docs/contracts/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/docs/contracts/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -17,7 +17,7 @@ IV                 12 bytes    random, fresh per encryption, prepended
 ciphertext + tag   rest        AES-256-GCM; GCM appends its own 16-byte tag
 ```
 
-Exactly what `crypto.subtle.encrypt` returns with the IV in front, so a payload is 28 bytes larger than its plaintext. The key is 32 random bytes, shared as unpadded base64url, 43 characters. Source: send.sgraph.ai since v0.1.0, documented at [sgit.ai/api/transfers](https://sgit.ai/api/transfers.html). Held by `tests/crypto.test.mjs`.
+Exactly what `crypto.subtle.encrypt` returns with the IV in front, so a payload is 28 bytes larger than its plaintext. The key is 32 random bytes, shared as unpadded base64url, 43 characters. Source: send.sgraph.ai since v0.1.1, documented at [sgit.ai/api/transfers](https://sgit.ai/api/transfers.html). Held by `tests/crypto.test.mjs`.
 
 ## The envelope {#envelope}
 

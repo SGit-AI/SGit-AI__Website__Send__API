@@ -32,12 +32,12 @@ The **access token** says who may upload. The **decryption key** says who may re
 
 ```
 curl -s https://api.send.sgit.ai/releases.json | python3 -m json.tool
-curl -s https://api.send.sgit.ai/v0.1.0/manifest.json > manifest.json
+curl -s https://api.send.sgit.ai/v0.1.1/manifest.json > manifest.json
 python3 - <<'PY'
 import hashlib, json, urllib.request
 m = json.load(open('manifest.json'))
 for f, e in m['entries'].items():
-    b = urllib.request.urlopen(f"https://api.send.sgit.ai/v0.1.0/{f}").read()
+    b = urllib.request.urlopen(f"https://api.send.sgit.ai/v0.1.1/{f}").read()
     print('ok ' if hashlib.sha256(b).hexdigest() == e['sha256'] else 'BAD', f)
 PY
 ```

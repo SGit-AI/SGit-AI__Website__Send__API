@@ -2,7 +2,7 @@
 
 > The Node tests against the in-memory server, the browser smoke test in Chromium, and the gate; what each proves.
 
-*Source: <https://api.send.sgit.ai/how-to/run-the-tests/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/how-to/run-the-tests/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -11,7 +11,7 @@
 ## In Node, against the server in memory
 
 ```
-cd releases/v0.1.0
+cd releases/v0.1.1
 node --test 'tests/*.test.mjs'
 ```
 

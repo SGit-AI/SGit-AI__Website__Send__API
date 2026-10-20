@@ -2,7 +2,7 @@
 
 > Every minor release is a complete copy of the code with no overlays and no shared files; majors are where the refactoring happens. The rules, the reasons, and how this differs from the IFD that came before it.
 
-*Source: <https://api.send.sgit.ai/docs/versioning/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/docs/versioning/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
@@ -10,7 +10,7 @@
 
 ## The rule
 
-Every release under `releases/` is a complete, independent copy of the code. `v0.1.1` starts as a copy of `v0.1.0`, changed where the change is; nothing in it imports from `v0.1.0`, overrides a method of `v0.1.0`, or loads a stylesheet of `v0.1.0`. A page that pins `v0.1.0` keeps running `v0.1.0` whatever lands after it.
+Every release under `releases/` is a complete, independent copy of the code. `v0.1.1` starts as a copy of `v0.1.1`, changed where the change is; nothing in it imports from `v0.1.1`, overrides a method of `v0.1.1`, or loads a stylesheet of `v0.1.1`. A page that pins `v0.1.1` keeps running `v0.1.1` whatever lands after it.
 
 | Kind | Example | What happens |
 |---|---|---|
@@ -29,7 +29,7 @@ The [IFD methodology](https://github.com/the-cyber-boardroom/SGraph-AI__App__Sen
 
 ## The mechanics
 
-1. `cp -r releases/v0.1.0 releases/v0.1.1`, then make the change in `v0.1.1` only.
+1. `cp -r releases/v0.1.1 releases/v0.1.1`, then make the change in `v0.1.1` only.
 2. `VERSION = 'v0.1.1'` in `send/send-api.js`; the gate checks it matches the directory.
 3. A test in `tests/` that fails without the change; `node --test 'tests/*.test.mjs'` green.
 4. `python3 tools/release.py cut v0.1.1` writes the manifest; `tools/version.json` says `release: v0.1.1`.

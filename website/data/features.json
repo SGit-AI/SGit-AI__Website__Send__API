@@ -1,9 +1,9 @@
 {
-  "audited": "2026-10-20, v0.1.0, by reading releases/v0.1.0 and running its tests",
+  "audited": "2026-10-20, v0.1.1, by reading releases/v0.1.1 and running its tests",
   "sections": [
     { "title": "The release", "features": [
-      { "feature": "A release directory that is a complete, independent copy: nothing in it loads from another version or another host", "status": "shipped", "since": "v0.1.0", "evidence": "`releases/v0.1.0/`; `tools/release.py check` fails on a reference outside the directory only by hash, see the note in corrections" },
-      { "feature": "A manifest with the SHA-256 of every file, recomputed by the gate", "status": "shipped", "since": "v0.1.0", "evidence": "`releases/v0.1.0/manifest.json`, `tools/release.py check`" },
+      { "feature": "A release directory that is a complete, independent copy: nothing in it loads from another version or another host", "status": "shipped", "since": "v0.1.0", "evidence": "`releases/v0.1.1/`; `tools/release.py check` fails on a reference outside the directory only by hash, see the note in corrections" },
+      { "feature": "A manifest with the SHA-256 of every file, recomputed by the gate", "status": "shipped", "since": "v0.1.0", "evidence": "`releases/v0.1.1/manifest.json`, `tools/release.py check`" },
       { "feature": "The live host checked file by file after a deploy", "status": "shipped", "since": "v0.1.0", "evidence": "`tools/live_check.py`, the verify-live job; not yet run, the host has no DNS yet (see needs)" },
       { "feature": "Presigned or multipart uploads for payloads over 4 MB", "status": "proposed", "since": "", "evidence": "`send-transfers.js` refuses with ETOOLARGE; the server route exists on send.sgraph.ai" }
     ]},

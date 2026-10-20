@@ -2,7 +2,7 @@
 
 > Who does what on this repository, as files: one person, one build agent, and the roles borrowed from the SG/Send team when their expertise is needed.
 
-*Source: <https://api.send.sgit.ai/about/team/> · api.send.sgit.ai v0.1.0 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
+*Source: <https://api.send.sgit.ai/about/team/> · api.send.sgit.ai v0.1.1 · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at pages, swap `.html` for `.md` to read the twin.*
 
 ---
 
